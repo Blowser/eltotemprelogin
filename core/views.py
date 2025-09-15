@@ -94,6 +94,10 @@ def login_view(request):
             return render(request, 'core/login.html', {'error': 'Credenciales inválidas'})
     return render(request, 'core/login.html')
 
+# Vista para la página "Quiénes somos"
+def quienes_somos_view(request):
+    return render(request, 'core/quienes_somos.html')
+
 
 #AHORA SE IMPORTA EL VIEWLIST DE LAS NOTICIAS, LUEGO SE CREA LA CLASE PARA FILTRAR
 class NoticiasFiltradasView(ListView):

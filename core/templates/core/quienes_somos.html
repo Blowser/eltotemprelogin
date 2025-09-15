@@ -1,0 +1,39 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'core/css/quienes_somos.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="quienes-somos-container">
+    <div class="info-section">
+        <h2>🏪 ¿Quiénes Somos?</h2>
+        <p class="info-text">
+            Somos una tienda especializada en TCG (Trading Card Games). Contamos con experiencia en el rubro realizando ventas de productos y torneos. Si quieres aprender a jugar algún TCG en específico, acércate a nuestra tienda y te enseñamos!
+        </p>
+    </div>
+    
+    <div class="horario-section">
+        <h3>🕒 Horario de Atención</h3>
+        <p class="horario-info">
+            Lunes a Viernes: 10:00 - 20:00<br>
+            Sábados: 10:00 - 18:00<br>
+            Domingos: 12:00 - 16:00
+        </p>
+        
+        <div class="direccion">
+            📍 Av. Providencia 2594, Providencia, Santiago
+        </div>
+        
+        <div class="mapa-container">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3329.1234567890123!2d-70.61234567890123!3d-33.41234567890123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662cf1234567890%3A0x1234567890abcdef!2sAv.%20Providencia%202594%2C%20Providencia%2C%20Regi%C3%B3n%20Metropolitana!5e0!3m2!1ses!2scl!4v1234567890123!5m2!1ses!2scl"
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </div>
+</div>
+{% endblock %}
