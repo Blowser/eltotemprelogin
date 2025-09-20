@@ -2,6 +2,7 @@
 
 import os
 from pathlib import Path
+import dj_database_url
 
 # Rutas base
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -58,14 +59,11 @@ WSGI_APPLICATION = 'ElTotem.wsgi.application'
 
 # Base de datos MySQL (Railway)
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST': os.getenv('DB_HOST', 'containers.railway.app'),
-        'PORT': os.getenv('DB_PORT', '3306'),
-        'NAME': os.getenv('DB_NAME', 'railway'),
-        'USER': os.getenv('DB_USER', 'root'),
-        'PASSWORD': os.getenv('DB_PASSWORD', ''),
-    }
+    'default': dj_database_url.parse(
+        os.environ['MYSQL_URL'],  # la variable que ves en Railway
+        conn_max_age=600,
+        ssl_require=False
+    )
 }
 
 
