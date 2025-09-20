@@ -12,8 +12,13 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-rbz-bj-ux1w9wpz7%#d-9r)ni-
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 # Dominios permitidos
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1,web-production-e97d.up.railway.app')\
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,web-production-e97d.up.railway.app')\
     .split(',')
+
+# Confianza explícita para CSRF
+CSRF_TRUSTED_ORIGINS = [
+    'https://web-production-e97d.up.railway.app'
+]
 
 # Aplicaciones
 INSTALLED_APPS = [
@@ -90,3 +95,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Otros ajustes
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# --- 🔑 Ajustes adicionales para Railway ---
+# Desactivar cookies seguras en pruebas (puedes volver a True después si usas HTTPS forzado)
+CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = False
