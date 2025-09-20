@@ -12,7 +12,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-rbz-bj-ux1w9wpz7%#d-9r)ni-
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 # Dominios permitidos
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,web-production-e97d.up.railway.app')\
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1,web-production-e97d.up.railway.app')\
     .split(',')
 
 # Aplicaciones
@@ -65,7 +65,6 @@ DATABASES = {
         ssl_require=False
     )
 }
-
 
 # Internacionalización
 LANGUAGE_CODE = 'en-us'
