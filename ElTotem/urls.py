@@ -1,11 +1,9 @@
-from django.contrib import admin
-from django.urls import path
-from django.urls import path, include
+# ElTotem/urls.py
 
+from django.contrib import admin
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('core.urls')),  # conecta el router local
-
+    path('', include('core.urls')),  # conecta el router de core
 ]
-

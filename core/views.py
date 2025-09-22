@@ -43,12 +43,22 @@ def index(request):
 #Tercer paso es agregar 'core' en settings.py de Eltotem en la parte de INSTALLED_APPS
 
 # core/views.py
+
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.hashers import make_password, check_password
 from django.utils import timezone
-from .models import Usuario, Direccion, Rol
+from django.views.generic import ListView
+from .models import Usuario, Direccion, Rol, NoticiaTCG
 
+# --- VISTA INDEX ---
+def index(request):
+    # Si hay mensaje de registro exitoso, lo pasamos al template y luego lo borramos de session
+    mensaje = request.session.pop('registro_exitoso', None)
+    return render(request, 'core/index.html', {'mensaje': mensaje})
+
+
+# --- VISTA REGISTRO ---
 def registrarse_view(request):
     if request.method == 'POST':
         try:
@@ -64,17 +74,15 @@ def registrarse_view(request):
 
             # Validación básica de contraseñas
             if password1 != password2:
-                return render(request, 'core/registrarse.html', {
-                    'error': 'Las contraseñas no coinciden'
-                })
+                return render(request, 'core/registrarse.html', {'error': 'Las contraseñas no coinciden'})
 
             # Obtener rol "Usuario"
             rol_default, _ = Rol.objects.get_or_create(id_rol=2, defaults={'tipo_rol': 'Usuario'})
 
-            # Encriptar la contraseña
+            # Encriptar contraseña
             password_encrypted = make_password(password1)
 
-            # Crear el usuario
+            # Crear usuario
             usuario = Usuario.objects.create(
                 nombre_usuario=username,
                 nombre=nombre,
@@ -85,7 +93,7 @@ def registrarse_view(request):
                 rol=rol_default
             )
 
-            # Crear la dirección asociada
+            # Crear dirección asociada
             Direccion.objects.create(
                 direccion=direccion_text,
                 comuna=comuna,
@@ -96,23 +104,44 @@ def registrarse_view(request):
             # Autologin
             auth_login(request, usuario, backend='django.contrib.auth.backends.ModelBackend')
 
-            # Mensaje de éxito en la misma página antes de redirigir
+            # Guardar mensaje de éxito
             request.session['registro_exitoso'] = f'Usuario registrado exitosamente. Bienvenido "{username}" al Clan'
 
             return redirect('index')
 
         except Exception as e:
-            # Esto imprimirá el error en los logs de Railway
             print("ERROR REGISTRO:", e)
-            # Mostrar mensaje de error amigable al usuario
-            return render(request, 'core/registrarse.html', {
-                'error': f'Ocurrió un error inesperado: {e}'
-            })
+            return render(request, 'core/registrarse.html', {'error': f'Ocurrió un error inesperado: {e}'})
 
     return render(request, 'core/registrarse.html')
 
 
+# --- VISTA LOGIN ---
+def login_view(request):
+    if request.method == 'POST':
+        try:
+            username = request.POST['username'].strip()
+            password = request.POST['password']
 
+            # Buscar usuario
+            usuario = Usuario.objects.get(nombre_usuario=username)
+
+            # Verificar contraseña
+            if check_password(password, usuario.password_encriptado):
+                auth_login(request, usuario, backend='django.contrib.auth.backends.ModelBackend')
+                return redirect('index')
+            else:
+                raise ValueError('Contraseña incorrecta')
+
+        except Usuario.DoesNotExist:
+            return render(request, 'core/login.html', {'error': 'Usuario no encontrado'})
+        except ValueError as ve:
+            return render(request, 'core/login.html', {'error': str(ve)})
+        except Exception as e:
+            print("ERROR LOGIN:", e)
+            return render(request, 'core/login.html', {'error': f'Ocurrió un error inesperado: {e}'})
+
+    return render(request, 'core/login.html')
 
 # Vista para la página "Quiénes somos"
 def quienes_somos_view(request):
