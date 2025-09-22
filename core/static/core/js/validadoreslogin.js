@@ -11,13 +11,13 @@ console.log('Validador Totémico de Login activo');
 
       // Validación
       const errors = {};
-      const reUsername = /^[A-Za-z]{3,20}$/;
+      const reUsername = /^[A-Za-z0-9_]{3,30}$/; // Letras, números y _ entre 3 y 30
 
       // Nombre de usuario
       if (!username) {
         errors.username = 'Por favor ingrese su nombre de usuario';
       } else if (!reUsername.test(username)) {
-        errors.username = 'El nombre de usuario debe tener entre 3 y 20 letras';
+        errors.username = 'El nombre de usuario debe tener entre 3 y 30 caracteres y puede incluir números y _';
       }
 
       // Contraseña

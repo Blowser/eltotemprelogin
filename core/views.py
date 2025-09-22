@@ -47,81 +47,82 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth.hashers import make_password, check_password
 from django.utils import timezone
 from .models import Usuario, Direccion, Rol
+from django.contrib import messages  # para mostrar mensajes flash
 
 def registrarse_view(request):
     if request.method == 'POST':
-        try:
-            # Lectura de campos
-            username  = request.POST.get('username', '').strip()
-            nombre    = request.POST.get('nombre', '').strip()
-            apellido  = request.POST.get('apellido', '').strip()
-            email     = request.POST.get('email', '').strip()
-            password1 = request.POST.get('password1', '')
-            password2 = request.POST.get('password2', '')
-            direccion_text = request.POST.get('direccion', '').strip()
-            comuna    = request.POST.get('comuna', '').strip()
-            region    = request.POST.get('region', '').strip()
+        username  = request.POST['username'].strip()
+        nombre    = request.POST['nombre'].strip()
+        apellido  = request.POST['apellido'].strip()
+        email     = request.POST['email'].strip()
+        password1 = request.POST['password1']
+        password2 = request.POST['password2']
+        direccion_text = request.POST['direccion'].strip()
+        comuna    = request.POST['comuna'].strip()
+        region    = request.POST['region'].strip()
 
-            # Validaciones
-            if not all([username, nombre, apellido, email, password1, password2, direccion_text, comuna, region]):
-                return render(request, 'core/registrarse.html', {'error': 'Todos los campos son obligatorios'})
-            if password1 != password2:
-                return render(request, 'core/registrarse.html', {'error': 'Las contraseñas no coinciden'})
+        if password1 != password2:
+            return render(request, 'core/registrarse.html', {
+                'error': 'Las contraseñas no coinciden'
+            })
 
-            # Obtener rol "Usuario"
-            rol_default, _ = Rol.objects.get_or_create(id_rol=2, defaults={'tipo_rol': 'Usuario'})
+        rol_default, _ = Rol.objects.get_or_create(id_rol=2, defaults={'tipo_rol': 'Usuario'})
 
-            # Encriptar contraseña
-            password_encrypted = make_password(password1)
+        password_encrypted = make_password(password1)
 
-            # Crear usuario
-            usuario = Usuario.objects.create(
-                nombre_usuario=username,
-                nombre=nombre,
-                apellido=apellido,
-                email=email,
-                password_encriptado=password_encrypted,
-                fecha_creacion=timezone.now(),
-                rol=rol_default
-            )
+        usuario = Usuario.objects.create(
+            nombre_usuario=username,
+            nombre=nombre,
+            apellido=apellido,
+            email=email,
+            password_encriptado=password_encrypted,
+            fecha_creacion=timezone.now(),
+            rol=rol_default
+        )
 
-            # Crear dirección asociada
-            Direccion.objects.create(
-                direccion=direccion_text,
-                comuna=comuna,
-                region=region,
-                usuario=usuario
-            )
+        Direccion.objects.create(
+            direccion=direccion_text,
+            comuna=comuna,
+            region=region,
+            usuario=usuario
+        )
 
-            # Autologin
-            auth_login(request, usuario, backend='django.contrib.auth.backends.ModelBackend')
-            return redirect('index')
+        # Autologin
+        auth_login(request, usuario, backend='django.contrib.auth.backends.ModelBackend')
 
-        except Exception as e:
-            return render(request, 'core/registrarse.html', {'error': f'Error al registrar usuario: {str(e)}'})
+        # Mensaje de éxito
+        messages.success(request, f'Usuario registrado exitosamente. Bienvenido {usuario.nombre_usuario} al Clan Totémico!')
+
+        return redirect('index')
 
     return render(request, 'core/registrarse.html')
 
 
 def login_view(request):
     if request.method == 'POST':
-        username = request.POST.get('username', '').strip()
-        password = request.POST.get('password', '')
+        username = request.POST['username'].strip()
+        password = request.POST['password']
 
         try:
             usuario = Usuario.objects.get(nombre_usuario=username)
             if check_password(password, usuario.password_encriptado):
                 auth_login(request, usuario, backend='django.contrib.auth.backends.ModelBackend')
+                messages.success(request, f'Bienvenido {usuario.nombre_usuario} al Clan Totémico!')
                 return redirect('index')
             else:
-                return render(request, 'core/login.html', {'error': 'Contraseña incorrecta'})
+                raise ValueError('Contraseña incorrecta')
 
         except Usuario.DoesNotExist:
-            return render(request, 'core/login.html', {'error': 'Usuario no encontrado'})
-        except Exception as e:
-            return render(request, 'core/login.html', {'error': f'Error al iniciar sesión: {str(e)}'})
+            return render(request, 'core/login.html', {
+                'error': 'Usuario no encontrado'
+            })
+        except ValueError as ve:
+            return render(request, 'core/login.html', {
+                'error': str(ve)
+            })
 
     return render(request, 'core/login.html')
+
 
 
 # Vista para la página "Quiénes somos"
