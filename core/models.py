@@ -1,6 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-from django.utils import timezone
 
 # =====================
 # MODELO DE ROLES
@@ -9,51 +7,21 @@ class Rol(models.Model):
     id_rol = models.AutoField(primary_key=True)
     tipo_rol = models.CharField(max_length=25, help_text="Usuario, Admin, Soporte, etc")
 
-    # Roles iniciales para poblar en apps.py
-    ROLES_INICIALES = [
-        (1, 'Admin'),
-        (2, 'Usuario')
-    ]
-
     def __str__(self):
         return self.tipo_rol
 
 
 # =====================
-# MANAGER USUARIO
+# USUARIO
 # =====================
-class UsuarioManager(BaseUserManager):
-    def create_user(self, nombre_usuario, email, password=None, **extra_fields):
-        if not email:
-            raise ValueError('El email es obligatorio')
-        email = self.normalize_email(email)
-        user = self.model(nombre_usuario=nombre_usuario, email=email, **extra_fields)
-        user.set_password(password)
-        user.save(using=self._db)
-        return user
-
-    def create_superuser(self, nombre_usuario, email, password=None, **extra_fields):
-        extra_fields.setdefault('is_active', True)
-        user = self.create_user(nombre_usuario, email, password, **extra_fields)
-        return user
-
-
-# =====================
-# MODELO USUARIO
-# =====================
-class Usuario(AbstractBaseUser):
+class Usuario(models.Model):
     nombre_usuario = models.CharField(max_length=20, unique=True)
     nombre = models.CharField(max_length=20)
     apellido = models.CharField(max_length=20)
     email = models.EmailField(unique=True)
-    fecha_creacion = models.DateTimeField(default=timezone.now)
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
     rol = models.ForeignKey(Rol, on_delete=models.CASCADE)
     is_active = models.BooleanField(default=True)
-
-    objects = UsuarioManager()
-
-    USERNAME_FIELD = 'nombre_usuario'
-    REQUIRED_FIELDS = ['email']
 
     def __str__(self):
         return self.nombre_usuario
@@ -131,7 +99,7 @@ class CarroCompras(models.Model):
     total_sin_iva = models.IntegerField()
     iva_compra = models.IntegerField()
     precio_final = models.FloatField()
-    fecha_uso = models.DateTimeField(help_text="Para trazabilidad")
+    fecha_uso = models.DateTimeField()
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
 
 
@@ -140,7 +108,7 @@ class ItemEnCarro(models.Model):
     cantidad_items = models.IntegerField()
     precio_unitario = models.IntegerField()
     total_sin_iva = models.IntegerField()
-    fecha_uso = models.DateTimeField(help_text="Para trazabilidad")
+    fecha_uso = models.DateTimeField()
     carro = models.ForeignKey(CarroCompras, on_delete=models.CASCADE)
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
 
@@ -150,7 +118,7 @@ class ItemEnCarro(models.Model):
 # =====================
 class Direccion(models.Model):
     id_direccion = models.AutoField(primary_key=True)
-    direccion = models.CharField(max_length=50, help_text="Incluye numeración")
+    direccion = models.CharField(max_length=50)
     comuna = models.CharField(max_length=30)
     region = models.CharField(max_length=30)
     codigo_postal = models.IntegerField(null=True, blank=True)
