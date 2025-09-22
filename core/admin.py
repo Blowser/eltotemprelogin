@@ -11,7 +11,7 @@ class RolAdmin(admin.ModelAdmin):
 
 @admin.register(Usuario)
 class UsuarioAdmin(admin.ModelAdmin):
-    list_display = ('id_usuario', 'nombre_usuario', 'nombre', 'apellido', 'email', 'rol')
+    list_display = ('id', 'nombre_usuario', 'nombre', 'apellido', 'email', 'rol')  # <- cambio aquí
     search_fields = ('nombre_usuario', 'nombre', 'apellido', 'email')
     list_filter = ('rol',)
 
