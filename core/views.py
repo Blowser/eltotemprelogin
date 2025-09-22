@@ -45,13 +45,14 @@ def index(request):
 # Ahora procedemos a hacer la view de registro:
 # --- VISTA DE REGISTRO ---
 from django.shortcuts import render, redirect
-from django.contrib.auth import login
-from .models import Usuario, Direccion, Rol
+from django.contrib.auth import login as auth_login
+from django.contrib.auth.hashers import make_password, check_password
 from django.utils import timezone
+from .models import Usuario, Direccion, Rol
 
+# --- VISTA DE REGISTRO ---
 def registrarse_view(request):
     if request.method == 'POST':
-        # Datos del formulario
         username  = request.POST['username'].strip()
         nombre    = request.POST['nombre'].strip()
         apellido  = request.POST['apellido'].strip()
@@ -68,19 +69,24 @@ def registrarse_view(request):
                 'error': 'Las contraseñas no coinciden'
             })
 
+        # Obtener rol "Usuario"
+        rol_default, _ = Rol.objects.get_or_create(id_rol=2, defaults={'tipo_rol': 'Usuario'})
+
+        # Encriptar la contraseña
+        password_encrypted = make_password(password1)
+
         # Crear el usuario
-        rol_default = Rol.objects.get(tipo_rol='Usuario')  # Asume que siempre existe
         usuario = Usuario.objects.create(
             nombre_usuario=username,
             nombre=nombre,
             apellido=apellido,
             email=email,
-            password_encriptado=password1,  # Opcional: mejor encriptar
+            password_encriptado=password_encrypted,
             fecha_creacion=timezone.now(),
             rol=rol_default
         )
 
-        # Crear la dirección asociada al usuario
+        # Crear la dirección asociada
         Direccion.objects.create(
             direccion=direccion_text,
             comuna=comuna,
@@ -89,11 +95,40 @@ def registrarse_view(request):
         )
 
         # Autologin
-        login(request, usuario, backend='django.contrib.auth.backends.ModelBackend')
+        auth_login(request, usuario, backend='django.contrib.auth.backends.ModelBackend')
 
         return redirect('index')
 
     return render(request, 'core/registrarse.html')
+
+
+# --- VISTA DE LOGIN ---
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username'].strip()
+        password = request.POST['password']
+
+        try:
+            # Buscar el usuario en la tabla personalizada
+            usuario = Usuario.objects.get(nombre_usuario=username)
+            
+            # Verificar contraseña encriptada
+            if check_password(password, usuario.password_encriptado):
+                auth_login(request, usuario, backend='django.contrib.auth.backends.ModelBackend')
+                return redirect('index')
+            else:
+                raise ValueError('Contraseña incorrecta')
+
+        except Usuario.DoesNotExist:
+            return render(request, 'core/login.html', {
+                'error': 'Usuario no encontrado'
+            })
+        except ValueError as ve:
+            return render(request, 'core/login.html', {
+                'error': str(ve)
+            })
+
+    return render(request, 'core/login.html')
 
 
 # Vista para la página "Quiénes somos"
