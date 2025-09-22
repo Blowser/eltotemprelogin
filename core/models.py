@@ -21,6 +21,7 @@ class Rol(models.Model):
 # USUARIO
 # =====================
 class Usuario(models.Model):
+    id_usuario = models.AutoField(primary_key=True)
     nombre_usuario = models.CharField(max_length=20, unique=True)
     nombre = models.CharField(max_length=20)
     apellido = models.CharField(max_length=20)
