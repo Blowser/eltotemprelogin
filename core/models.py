@@ -4,12 +4,14 @@ class Rol(models.Model):
     id_rol = models.AutoField(primary_key=True)
     tipo_rol = models.CharField(max_length=25, help_text="Usuario, Admin, Soporte, etc")
 
-# Población de roles
-Rol.objects.get_or_create(id_rol=1, defaults={'tipo_rol': 'Admin'})
-Rol.objects.get_or_create(id_rol=2, defaults={'tipo_rol': 'Usuario'})
+    # Lista de roles
+    ROLES_INICIALES = [
+        (1, 'Admin'),
+        (2, 'Usuario')
+    ]
 
-def __str__(self):
-    return self.tipo_rol
+    def __str__(self):
+        return self.tipo_rol
 
 class Usuario(models.Model):
     id_usuario = models.AutoField(primary_key=True)
