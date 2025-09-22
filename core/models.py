@@ -7,6 +7,12 @@ class Rol(models.Model):
     id_rol = models.AutoField(primary_key=True)
     tipo_rol = models.CharField(max_length=25, help_text="Usuario, Admin, Soporte, etc")
 
+    # Roles iniciales para poblar en apps.py
+    ROLES_INICIALES = [
+        (1, 'Admin'),
+        (2, 'Usuario')
+    ]
+
     def __str__(self):
         return self.tipo_rol
 
