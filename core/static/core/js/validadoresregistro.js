@@ -19,15 +19,16 @@ console.log('Validador Totémico activo');
 
       // Validación
       const errors = {};
-      const reLetters = /^[A-Za-zÁÉÍÓÚáéíóúÑñ ]{3,30}$/; // incluye espacios y tildes
-      const reEmail   = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      const rePw      = /^(?=.*\d)(?=.*[A-Z]).{6,18}$/;
+      const reLetters   = /^[A-Za-zÁÉÍÓÚáéíóúÑñ ]{3,30}$/; // incluye espacios y tildes
+      const reUsername  = /^[A-Za-z0-9_]{3,30}$/;           // letras, números y guion bajo
+      const reEmail     = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const rePw        = /^(?=.*\d)(?=.*[A-Z]).{6,18}$/;
 
       // Nombre de usuario
       if (!username) {
         errors.username = 'Por favor ingrese un nombre de usuario';
-      } else if (!reLetters.test(username)) {
-        errors.username = 'El nombre de usuario debe tener entre 3 y 30 letras';
+      } else if (!reUsername.test(username)) {
+        errors.username = 'El nombre de usuario debe tener entre 3 y 30 caracteres y puede incluir números o guiones bajos';
       }
 
       // Nombre
