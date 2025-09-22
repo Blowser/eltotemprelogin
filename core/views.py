@@ -42,91 +42,84 @@ def index(request):
 #El segundo paso será crear la url en url.py tanto de core como de Eltotem, y se crean las rutas
 #Tercer paso es agregar 'core' en settings.py de Eltotem en la parte de INSTALLED_APPS
 
-# Ahora procedemos a hacer la view de registro:
-# --- VISTA DE REGISTRO ---
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.hashers import make_password, check_password
 from django.utils import timezone
 from .models import Usuario, Direccion, Rol
 
-# --- VISTA DE REGISTRO ---
 def registrarse_view(request):
     if request.method == 'POST':
-        username  = request.POST['username'].strip()
-        nombre    = request.POST['nombre'].strip()
-        apellido  = request.POST['apellido'].strip()
-        email     = request.POST['email'].strip()
-        password1 = request.POST['password1']
-        password2 = request.POST['password2']
-        direccion_text = request.POST['direccion'].strip()
-        comuna    = request.POST['comuna'].strip()
-        region    = request.POST['region'].strip()
+        try:
+            # Lectura de campos
+            username  = request.POST.get('username', '').strip()
+            nombre    = request.POST.get('nombre', '').strip()
+            apellido  = request.POST.get('apellido', '').strip()
+            email     = request.POST.get('email', '').strip()
+            password1 = request.POST.get('password1', '')
+            password2 = request.POST.get('password2', '')
+            direccion_text = request.POST.get('direccion', '').strip()
+            comuna    = request.POST.get('comuna', '').strip()
+            region    = request.POST.get('region', '').strip()
 
-        # Validación básica de contraseñas
-        if password1 != password2:
-            return render(request, 'core/registrarse.html', {
-                'error': 'Las contraseñas no coinciden'
-            })
+            # Validaciones
+            if not all([username, nombre, apellido, email, password1, password2, direccion_text, comuna, region]):
+                return render(request, 'core/registrarse.html', {'error': 'Todos los campos son obligatorios'})
+            if password1 != password2:
+                return render(request, 'core/registrarse.html', {'error': 'Las contraseñas no coinciden'})
 
-        # Obtener rol "Usuario"
-        rol_default, _ = Rol.objects.get_or_create(id_rol=2, defaults={'tipo_rol': 'Usuario'})
+            # Obtener rol "Usuario"
+            rol_default, _ = Rol.objects.get_or_create(id_rol=2, defaults={'tipo_rol': 'Usuario'})
 
-        # Encriptar la contraseña
-        password_encrypted = make_password(password1)
+            # Encriptar contraseña
+            password_encrypted = make_password(password1)
 
-        # Crear el usuario
-        usuario = Usuario.objects.create(
-            nombre_usuario=username,
-            nombre=nombre,
-            apellido=apellido,
-            email=email,
-            password_encriptado=password_encrypted,
-            fecha_creacion=timezone.now(),
-            rol=rol_default
-        )
+            # Crear usuario
+            usuario = Usuario.objects.create(
+                nombre_usuario=username,
+                nombre=nombre,
+                apellido=apellido,
+                email=email,
+                password_encriptado=password_encrypted,
+                fecha_creacion=timezone.now(),
+                rol=rol_default
+            )
 
-        # Crear la dirección asociada
-        Direccion.objects.create(
-            direccion=direccion_text,
-            comuna=comuna,
-            region=region,
-            usuario=usuario
-        )
+            # Crear dirección asociada
+            Direccion.objects.create(
+                direccion=direccion_text,
+                comuna=comuna,
+                region=region,
+                usuario=usuario
+            )
 
-        # Autologin
-        auth_login(request, usuario, backend='django.contrib.auth.backends.ModelBackend')
+            # Autologin
+            auth_login(request, usuario, backend='django.contrib.auth.backends.ModelBackend')
+            return redirect('index')
 
-        return redirect('index')
+        except Exception as e:
+            return render(request, 'core/registrarse.html', {'error': f'Error al registrar usuario: {str(e)}'})
 
     return render(request, 'core/registrarse.html')
 
 
-# --- VISTA DE LOGIN ---
 def login_view(request):
     if request.method == 'POST':
-        username = request.POST['username'].strip()
-        password = request.POST['password']
+        username = request.POST.get('username', '').strip()
+        password = request.POST.get('password', '')
 
         try:
-            # Buscar el usuario en la tabla personalizada
             usuario = Usuario.objects.get(nombre_usuario=username)
-            
-            # Verificar contraseña encriptada
             if check_password(password, usuario.password_encriptado):
                 auth_login(request, usuario, backend='django.contrib.auth.backends.ModelBackend')
                 return redirect('index')
             else:
-                raise ValueError('Contraseña incorrecta')
+                return render(request, 'core/login.html', {'error': 'Contraseña incorrecta'})
 
         except Usuario.DoesNotExist:
-            return render(request, 'core/login.html', {
-                'error': 'Usuario no encontrado'
-            })
-        except ValueError as ve:
-            return render(request, 'core/login.html', {
-                'error': str(ve)
-            })
+            return render(request, 'core/login.html', {'error': 'Usuario no encontrado'})
+        except Exception as e:
+            return render(request, 'core/login.html', {'error': f'Error al iniciar sesión: {str(e)}'})
 
     return render(request, 'core/login.html')
 
