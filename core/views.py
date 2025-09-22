@@ -49,6 +49,14 @@ from django.contrib.auth import authenticate, login
 from django.utils import timezone
 from .models import Usuario, Rol, Direccion
 
+from django.shortcuts import render, redirect
+from django.contrib.auth import login
+from django.contrib.auth.hashers import make_password, check_password
+from .models import Usuario, Rol, Direccion
+
+# =====================
+# REGISTRO
+# =====================
 def registrarse_view(request):
     if request.method == 'POST':
         try:
@@ -67,13 +75,16 @@ def registrarse_view(request):
 
             rol_default, _ = Rol.objects.get_or_create(id_rol=2, defaults={'tipo_rol': 'Usuario'})
 
-            usuario = Usuario.objects.create_user(
+            # Guardamos contraseña encriptada manualmente
+            usuario = Usuario.objects.create(
                 nombre_usuario=username,
-                email=email,
-                password=password1,
                 nombre=nombre,
                 apellido=apellido,
-                rol=rol_default
+                email=email,
+                rol=rol_default,
+                is_active=True,
+                fecha_creacion=None,
+                password=make_password(password1)
             )
 
             Direccion.objects.create(
@@ -83,7 +94,8 @@ def registrarse_view(request):
                 usuario=usuario
             )
 
-            login(request, usuario)
+            # Logueamos manualmente
+            request.session['usuario_id'] = usuario.id
             request.session['registro_exitoso'] = f'Usuario registrado exitosamente. Bienvenido "{username}" al Clan'
             return redirect('index')
 
@@ -93,19 +105,26 @@ def registrarse_view(request):
     return render(request, 'core/registrarse.html')
 
 
+# =====================
+# LOGIN
+# =====================
 def login_view(request):
     if request.method == 'POST':
         username = request.POST['username'].strip()
         password = request.POST['password']
 
-        usuario = authenticate(request, nombre_usuario=username, password=password)
-        if usuario is not None:
-            login(request, usuario)
-            return redirect('index')
-        else:
+        try:
+            usuario = Usuario.objects.get(nombre_usuario=username)
+            if check_password(password, usuario.password):
+                request.session['usuario_id'] = usuario.id
+                return redirect('index')
+            else:
+                return render(request, 'core/login.html', {'error': 'Usuario o contraseña incorrectos'})
+        except Usuario.DoesNotExist:
             return render(request, 'core/login.html', {'error': 'Usuario o contraseña incorrectos'})
 
     return render(request, 'core/login.html')
+
 
 # Vista para la página "Quiénes somos"
 def quienes_somos_view(request):
