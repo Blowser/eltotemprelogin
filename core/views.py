@@ -45,55 +45,37 @@ def index(request):
 # core/views.py
 
 from django.shortcuts import render, redirect
-from django.contrib.auth import login as auth_login
-from django.contrib.auth.hashers import make_password, check_password
+from django.contrib.auth import authenticate, login
 from django.utils import timezone
-from django.views.generic import ListView
-from .models import Usuario, Direccion, Rol, NoticiaTCG
+from .models import Usuario, Rol, Direccion
 
-# --- VISTA INDEX ---
-def index(request):
-    # Si hay mensaje de registro exitoso, lo pasamos al template y luego lo borramos de session
-    mensaje = request.session.pop('registro_exitoso', None)
-    return render(request, 'core/index.html', {'mensaje': mensaje})
-
-
-# --- VISTA REGISTRO ---
 def registrarse_view(request):
     if request.method == 'POST':
         try:
-            username  = request.POST['username'].strip()
-            nombre    = request.POST['nombre'].strip()
-            apellido  = request.POST['apellido'].strip()
-            email     = request.POST['email'].strip()
+            username = request.POST['username'].strip()
+            nombre = request.POST['nombre'].strip()
+            apellido = request.POST['apellido'].strip()
+            email = request.POST['email'].strip()
             password1 = request.POST['password1']
             password2 = request.POST['password2']
             direccion_text = request.POST['direccion'].strip()
-            comuna    = request.POST['comuna'].strip()
-            region    = request.POST['region'].strip()
+            comuna = request.POST['comuna'].strip()
+            region = request.POST['region'].strip()
 
-            # Validación básica de contraseñas
             if password1 != password2:
                 return render(request, 'core/registrarse.html', {'error': 'Las contraseñas no coinciden'})
 
-            # Obtener rol "Usuario"
             rol_default, _ = Rol.objects.get_or_create(id_rol=2, defaults={'tipo_rol': 'Usuario'})
 
-            # Encriptar contraseña
-            password_encrypted = make_password(password1)
-
-            # Crear usuario
-            usuario = Usuario.objects.create(
+            usuario = Usuario.objects.create_user(
                 nombre_usuario=username,
+                email=email,
+                password=password1,
                 nombre=nombre,
                 apellido=apellido,
-                email=email,
-                password_encriptado=password_encrypted,
-                fecha_creacion=timezone.now(),
                 rol=rol_default
             )
 
-            # Crear dirección asociada
             Direccion.objects.create(
                 direccion=direccion_text,
                 comuna=comuna,
@@ -101,45 +83,27 @@ def registrarse_view(request):
                 usuario=usuario
             )
 
-            # Autologin
-            auth_login(request, usuario, backend='django.contrib.auth.backends.ModelBackend')
-
-            # Guardar mensaje de éxito
+            login(request, usuario)
             request.session['registro_exitoso'] = f'Usuario registrado exitosamente. Bienvenido "{username}" al Clan'
-
             return redirect('index')
 
         except Exception as e:
-            print("ERROR REGISTRO:", e)
             return render(request, 'core/registrarse.html', {'error': f'Ocurrió un error inesperado: {e}'})
 
     return render(request, 'core/registrarse.html')
 
 
-# --- VISTA LOGIN ---
 def login_view(request):
     if request.method == 'POST':
-        try:
-            username = request.POST['username'].strip()
-            password = request.POST['password']
+        username = request.POST['username'].strip()
+        password = request.POST['password']
 
-            # Buscar usuario
-            usuario = Usuario.objects.get(nombre_usuario=username)
-
-            # Verificar contraseña
-            if check_password(password, usuario.password_encriptado):
-                auth_login(request, usuario, backend='django.contrib.auth.backends.ModelBackend')
-                return redirect('index')
-            else:
-                raise ValueError('Contraseña incorrecta')
-
-        except Usuario.DoesNotExist:
-            return render(request, 'core/login.html', {'error': 'Usuario no encontrado'})
-        except ValueError as ve:
-            return render(request, 'core/login.html', {'error': str(ve)})
-        except Exception as e:
-            print("ERROR LOGIN:", e)
-            return render(request, 'core/login.html', {'error': f'Ocurrió un error inesperado: {e}'})
+        usuario = authenticate(request, nombre_usuario=username, password=password)
+        if usuario is not None:
+            login(request, usuario)
+            return redirect('index')
+        else:
+            return render(request, 'core/login.html', {'error': 'Usuario o contraseña incorrectos'})
 
     return render(request, 'core/login.html')
 

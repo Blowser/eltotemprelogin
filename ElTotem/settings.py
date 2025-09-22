@@ -100,3 +100,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Desactivar cookies seguras en pruebas (puedes volver a True después si usas HTTPS forzado)
 CSRF_COOKIE_SECURE = False
 SESSION_COOKIE_SECURE = False
+
+AUTH_USER_MODEL = 'core.Usuario'

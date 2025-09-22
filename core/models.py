@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.utils import timezone
+
 
 class Rol(models.Model):
     id_rol = models.AutoField(primary_key=True)
@@ -13,15 +16,33 @@ class Rol(models.Model):
     def __str__(self):
         return self.tipo_rol
 
-class Usuario(models.Model):
-    id_usuario = models.AutoField(primary_key=True)
-    nombre_usuario = models.CharField(max_length=20)
+class UsuarioManager(BaseUserManager):
+    def create_user(self, nombre_usuario, email, password=None, **extra_fields):
+        if not email:
+            raise ValueError('El email es obligatorio')
+        email = self.normalize_email(email)
+        user = self.model(nombre_usuario=nombre_usuario, email=email, **extra_fields)
+        user.set_password(password)  # Hash automático
+        user.save(using=self._db)
+        return user
+
+class Usuario(AbstractBaseUser):
+    nombre_usuario = models.CharField(max_length=20, unique=True)
     nombre = models.CharField(max_length=20)
     apellido = models.CharField(max_length=20)
-    email = models.CharField(max_length=255)
-    password_encriptado = models.CharField(max_length=25)
-    fecha_creacion = models.DateTimeField()
+    email = models.EmailField(unique=True)
+    fecha_creacion = models.DateTimeField(default=timezone.now)
     rol = models.ForeignKey(Rol, on_delete=models.CASCADE)
+    is_active = models.BooleanField(default=True)
+
+    objects = UsuarioManager()
+
+    USERNAME_FIELD = 'nombre_usuario'
+    REQUIRED_FIELDS = ['email']
+
+    def __str__(self):
+        return self.nombre_usuario
+
 
 class Producto(models.Model):
     id_producto = models.AutoField(primary_key=True)
@@ -173,3 +194,6 @@ class NoticiaTCG(models.Model):
     def __str__(self):
         return f"{self.titulo} ({self.juego})"
 
+class Rol(models.Model):
+    id_rol = models.AutoField(primary_key=True)
+    tipo_rol = models.CharField(max_length=25, help_text="Usuario, Admin, Soporte, etc")
