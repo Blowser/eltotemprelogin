@@ -43,56 +43,58 @@ def index(request):
 #Tercer paso es agregar 'core' en settings.py de Eltotem en la parte de INSTALLED_APPS
 
 # Ahora procedemos a hacer la view de registro:
+# --- VISTA DE REGISTRO ---
+from django.shortcuts import render, redirect
+from django.contrib.auth import login
+from .models import Usuario, Direccion, Rol
+from django.utils import timezone
+
 def registrarse_view(request):
     if request.method == 'POST':
-        # Obtener los datos del formulario
-        username = request.POST['username']
-        nombre = request.POST['nombre']
-        apellido = request.POST['apellido']
-        email = request.POST['email']
+        # Datos del formulario
+        username  = request.POST['username'].strip()
+        nombre    = request.POST['nombre'].strip()
+        apellido  = request.POST['apellido'].strip()
+        email     = request.POST['email'].strip()
         password1 = request.POST['password1']
         password2 = request.POST['password2']
-        direccion = request.POST['direccion']
-        
-        # Validar que las contraseñas coincidan
+        direccion_text = request.POST['direccion'].strip()
+        comuna    = request.POST['comuna'].strip()
+        region    = request.POST['region'].strip()
+
+        # Validación básica de contraseñas
         if password1 != password2:
             return render(request, 'core/registrarse.html', {
                 'error': 'Las contraseñas no coinciden'
             })
-        
-        # Crear el usuario usando UserCreationForm
-        form = UserCreationForm({
-            'username': username,
-            'password1': password1,
-            'password2': password2,
-        })
-        
-        if form.is_valid():
-            user = form.save()
-            # Autenticar y hacer login automáticamente después del registro
-            login(request, user)
-            return redirect('index')  # Redirigir al index después del registro exitoso
-        else:
-            # Si hay errores en el formulario, mostrarlos
-            return render(request, 'core/registrarse.html', {
-                'error': 'Error en el formulario: ' + str(form.errors)
-            })
-    
-    return render(request, 'core/registrarse.html')
-#Luego, procedemos a agregarlo al pattern en urls.py de la aplicación, en este caso, core
 
-#REPETIR para todas las templates, por ejemplo, login
-def login_view(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('index')  # o donde quieras redirigir
-        else:
-            return render(request, 'core/login.html', {'error': 'Credenciales inválidas'})
-    return render(request, 'core/login.html')
+        # Crear el usuario
+        rol_default = Rol.objects.get(tipo_rol='Usuario')  # Asume que siempre existe
+        usuario = Usuario.objects.create(
+            nombre_usuario=username,
+            nombre=nombre,
+            apellido=apellido,
+            email=email,
+            password_encriptado=password1,  # Opcional: mejor encriptar
+            fecha_creacion=timezone.now(),
+            rol=rol_default
+        )
+
+        # Crear la dirección asociada al usuario
+        Direccion.objects.create(
+            direccion=direccion_text,
+            comuna=comuna,
+            region=region,
+            usuario=usuario
+        )
+
+        # Autologin
+        login(request, usuario, backend='django.contrib.auth.backends.ModelBackend')
+
+        return redirect('index')
+
+    return render(request, 'core/registrarse.html')
+
 
 # Vista para la página "Quiénes somos"
 def quienes_somos_view(request):
