@@ -64,14 +64,28 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ElTotem.wsgi.application'
 
-# Base de datos MySQL (Railway)
-DATABASES = {
-    'default': dj_database_url.parse(
-        os.environ['MYSQL_URL'],  # la variable que ves en Railway
-        conn_max_age=600,
-        ssl_require=False
-    )
-}
+
+
+MYSQL_URL = os.environ.get('MYSQL_URL')
+
+if MYSQL_URL:
+    # Railway o entorno con MySQL
+    DATABASES = {
+        'default': dj_database_url.parse(
+            MYSQL_URL,
+            conn_max_age=600,
+            ssl_require=False
+        )
+    }
+else:
+    # Entorno local con SQLite
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+
 
 # Internacionalización
 LANGUAGE_CODE = 'en-us'
