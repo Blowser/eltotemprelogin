@@ -9,7 +9,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECRET_KEY y DEBUG vía variables de entorno (o fallback)
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-rbz-bj-ux1w9wpz7%#d-9r)ni-6709j&7is)+0hq*kyw=c0ls5')
-DEBUG = os.getenv('DEBUG', 'False') == 'True'
+DEBUG = True
+
 
 # Dominios permitidos
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,web-production-e97d.up.railway.app')\
