@@ -7,7 +7,7 @@ django.setup()
 
 from django.contrib.auth import authenticate
 
-user = authenticate(username='admin', password='TuPasswordSegura123')
+user = authenticate(username='admin', password='eltotem123')
 if user:
     print(f"✅ Chamán encontrado: {user.username}")
 else:
