@@ -298,6 +298,63 @@ def scrap_tcg(request):
         print("Mitos y Leyendas:", "Guardada" if creado else "Ya existía", titulo)
 
     return HttpResponse("Scraping combinado de TCG completado.")
+###VIEWS DE PRODUCTOS
+from django.views.generic import ListView
+from .models import Producto
+
+from django.http import HttpResponseServerError
+
+def ProductosView(request):
+    juego = request.GET.get('juego')
+    tipo = request.GET.get('tipo')
+
+    productos = Producto.objects.all()
+
+    if juego:
+        productos = productos.filter(juego__nombre__icontains=juego)
+
+    if tipo:
+        productos = productos.filter(tipo_producto=tipo)
+
+    return render(request, 'core/productos.html', {'productos': productos})
+
+        
+### VIEWS PARA LOS DETALLES DE LOS PRODUCTOS
+from django.shortcuts import get_object_or_404
+
+def detalle_producto(request, id):
+    producto = get_object_or_404(Producto, id_producto=id)
+    return render(request, 'core/detallesproducto.html', {'producto': producto})
+
+
+def ProductosView(request):
+    juego = request.GET.get('juego')
+    tipo = request.GET.get('tipo')
+
+    productos = Producto.objects.all()
+
+    if juego:
+        productos = productos.filter(juego__nombre__icontains=juego)
+
+    if tipo:
+        productos = productos.filter(tipo_producto=tipo)
+
+    return render(request, 'core/productos.html', {'productos': productos})
+
+###VIEWS PARA ACCESORIOS
+def AccesoriosView(request):
+    tipo = request.GET.get('tipo')
+    juego = request.GET.get('juego')
+
+    accesorios = Producto.objects.filter(tipo_producto='accesorio')
+
+    if tipo:
+        accesorios = accesorios.filter(tipo_accesorio=tipo)
+
+    if juego:
+        accesorios = accesorios.filter(juego__nombre__icontains=juego)
+
+    return render(request, 'core/accesorios.html', {'accesorios': accesorios})
 
 
     
