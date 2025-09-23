@@ -12,3 +12,4 @@ urlpatterns = [
 
 # 🔥 Aquí va el conjuro visual, fuera de la lista
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+#reset de tablitas
