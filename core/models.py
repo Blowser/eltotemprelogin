@@ -29,15 +29,22 @@ class Rol(models.Model):
 
 
 
+###MODELO PARA USUARIOS
+from django.contrib.auth.models import User
+
+from django.contrib.auth.models import User
+
 class Usuario(models.Model):
     id_usuario = models.AutoField(primary_key=True)
-    nombre_usuario = models.CharField(max_length=20)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='perfil')
     nombre = models.CharField(max_length=20)
     apellido = models.CharField(max_length=20)
-    email = models.CharField(max_length=255)
-    password_encriptado = models.CharField(max_length=25)
-    fecha_creacion = models.DateTimeField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
     rol = models.ForeignKey('core.Rol', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.nombre} {self.apellido} ({self.user.username})"
+
 
 
 class Juego(models.Model):
