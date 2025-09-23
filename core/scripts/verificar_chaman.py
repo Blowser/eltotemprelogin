@@ -1,4 +1,9 @@
 # core/scripts/verificar_chaman.py
+import os
+import django
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ElTotem.settings')  # Ajustá si tu settings está en otro módulo
+django.setup()
 
 from django.contrib.auth import authenticate
 
