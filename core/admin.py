@@ -11,9 +11,18 @@ class RolAdmin(admin.ModelAdmin):
 
 @admin.register(Usuario)
 class UsuarioAdmin(admin.ModelAdmin):
-    list_display = ('id_usuario', 'nombre_usuario', 'nombre', 'apellido', 'email', 'rol')
-    search_fields = ('nombre_usuario', 'nombre', 'apellido', 'email')
+    list_display = ('id_usuario', 'get_username', 'nombre', 'apellido', 'get_email', 'rol')
+    search_fields = ('nombre', 'apellido', 'user__username', 'user__email')
     list_filter = ('rol',)
+
+    def get_username(self, obj):
+        return obj.user.username
+    get_username.short_description = 'Username'
+
+    def get_email(self, obj):
+        return obj.user.email
+    get_email.short_description = 'Email'
+
 
 @admin.register(Producto)
 class ProductoAdmin(admin.ModelAdmin):
