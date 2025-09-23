@@ -14,7 +14,6 @@ class Usuario(models.Model):
     fecha_creacion = models.DateTimeField()
     rol = models.ForeignKey(Rol, on_delete=models.CASCADE)
 
-from django.db import models
 
 class Juego(models.Model):
     nombre = models.CharField(max_length=50)
