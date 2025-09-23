@@ -27,7 +27,7 @@
     <a href="{% url 'login' %}">Ingresar</a>
     <a href="#">🛒 Carrito</a>
     {% if user.is_staff %}
-      <a href="#">⚙️ Panel Admin</a>
+      <a href="/admin/">⚙️ Panel Admin</a>
     {% endif %}
     <button id="toggle-modo" class="btn btn-sm btn-outline-warning">🌓 Cambiar modo</button>
   </div>
@@ -36,8 +36,8 @@
 <header class="navbar">
   <nav class="nav-links">
     <a href="{% url 'index' %}">Inicio</a>
-    <a href="#">Productos</a>
-    <a href="#">Accesorios</a>
+    <a href="{% url 'productos' %}">Productos</a>
+    <a href="{% url 'accesorios' %}">Accesorios</a>
     <a href="#">Foro</a>
     <a href="{% url 'noticias' %}">Noticias</a>
     <a href="{% url 'quienes_somos' %}">Quienes somos</a>
