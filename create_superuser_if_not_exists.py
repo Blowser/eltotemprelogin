@@ -1,19 +1,36 @@
-from django.contrib.auth import get_user_model
-import os
-import django
+from django.core.management.base import BaseCommand
+from django.contrib.auth.models import User
+from core.models import Usuario
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ElTotem.settings')
-django.setup()
+class Command(BaseCommand):
+    help = 'Crea un superuser y su perfil totémico'
 
-User = get_user_model()
+    def handle(self, *args, **kwargs):
+        username = 'admin'
+        password = 'eltotem123'
+        email = 'admin@example.com'
 
-if not User.objects.filter(username='admin').exists():
-    User.objects.create_superuser(
-        username='admin',
-        email='admin@example.com',
-        password='TuPasswordSegura123'
-    )
-    print("Superuser creado")
-else:
-    print("Superuser ya existe")
+        user, created = User.objects.get_or_create(username=username)
+        if created:
+            user.email = email
+            user.is_staff = True
+            user.is_superuser = True
+            user.set_password(password)
+            user.save()
+            self.stdout.write("✅ Chamán creado")
 
+        else:
+            user.set_password(password)
+            user.save()
+            self.stdout.write("🔄 Chamán ya existía, contraseña actualizada")
+
+        if not hasattr(user, 'perfil'):
+            Usuario.objects.create(
+                user=user,
+                nombre='Admin',
+                apellido='Totémico',
+                rol_id=1  # Asegurate de que exista el rol con ID 1
+            )
+            self.stdout.write("✅ Perfil totémico creado")
+        else:
+            self.stdout.write("🔍 El chamán ya tenía perfil")
