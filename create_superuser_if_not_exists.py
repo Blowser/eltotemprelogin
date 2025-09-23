@@ -1,6 +1,11 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 from core.models import Usuario
+import os
+import django
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ElTotem.settings')  # Ajustá si tu settings está en otro módulo
+django.setup()
 
 class Command(BaseCommand):
     help = 'Crea un superuser y su perfil totémico'
