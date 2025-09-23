@@ -40,7 +40,7 @@ class Usuario(models.Model):
     nombre = models.CharField(max_length=20)
     apellido = models.CharField(max_length=20)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
-    rol = models.ForeignKey('core.Rol', on_delete=models.CASCADE)
+    rol = models.ForeignKey(Rol, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.nombre} {self.apellido} ({self.user.username})"
