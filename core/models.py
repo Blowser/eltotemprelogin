@@ -37,7 +37,7 @@ class Usuario(models.Model):
     email = models.CharField(max_length=255)
     password_encriptado = models.CharField(max_length=25)
     fecha_creacion = models.DateTimeField()
-    rol = models.ForeignKey(Rol, on_delete=models.CASCADE)
+    rol = models.ForeignKey('core.Rol', on_delete=models.CASCADE)
 
 
 class Juego(models.Model):
