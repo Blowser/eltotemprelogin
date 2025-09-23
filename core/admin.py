@@ -1,8 +1,8 @@
 from django.contrib import admin
 from .models import (
-    Rol, Usuario, Producto, Juego, Edicion, Accesorio,
-    FiguraColeccion, Mazo, Sobre, CarroCompras, ItemEnCarro,
-    Direccion, Pedido, MetodoPago, Pago, Thread, ForoPost, ForoReporte, NoticiaTCG
+    Rol, Usuario, Producto, Juego, Edicion,
+    CarroCompras, ItemEnCarro, Direccion, Pedido,
+    MetodoPago, Pago, Thread, ForoPost, ForoReporte, NoticiaTCG
 )
 
 @admin.register(Rol)
@@ -22,35 +22,16 @@ class ProductoAdmin(admin.ModelAdmin):
 
 @admin.register(Juego)
 class JuegoAdmin(admin.ModelAdmin):
-    list_display = ('id_juego', 'nombre', 'desarrollador', 'sitio_web')
+    list_display = ('id', 'nombre', 'desarrollador', 'sitio_web')
     search_fields = ('nombre',)
     list_filter = ('desarrollador',)
 
 @admin.register(Edicion)
 class EdicionAdmin(admin.ModelAdmin):
-    list_display = ('id_edicion', 'nombre_edicion', 'fecha_lanzamiento', 'descripcion')
+    list_display = ('id', 'nombre_edicion', 'fecha_lanzamiento', 'descripcion')
     list_filter = ('fecha_lanzamiento',)
     search_fields = ('nombre_edicion',)
 
-@admin.register(Accesorio)
-class AccesorioAdmin(admin.ModelAdmin):
-    list_display = ('id_accesorio', 'tipo_accesorio', 'precio_unitario', 'stock', 'producto')
-    list_filter = ('tipo_accesorio',)
-
-@admin.register(FiguraColeccion)
-class FiguraColeccionAdmin(admin.ModelAdmin):
-    list_display = ('id_figura', 'precio_unitario', 'stock', 'juego', 'producto')
-    list_filter = ('juego',)
-
-@admin.register(Mazo)
-class MazoAdmin(admin.ModelAdmin):
-    list_display = ('id_mazo', 'cartas_por_mazo', 'precio_unitario', 'stock', 'edicion', 'juego', 'producto')
-    list_filter = ('juego', 'edicion')
-
-@admin.register(Sobre)
-class SobreAdmin(admin.ModelAdmin):
-    list_display = ('id_sobre', 'nombre', 'tipo_sobre', 'cartas_por_sobre', 'precio_unitario', 'stock', 'juego', 'edicion', 'producto')
-    list_filter = ('juego', 'edicion', 'tipo_sobre')
 
 @admin.register(CarroCompras)
 class CarroComprasAdmin(admin.ModelAdmin):
