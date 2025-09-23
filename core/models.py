@@ -2,16 +2,31 @@ from django.db import models
 
 class Rol(models.Model):
     id_rol = models.AutoField(primary_key=True)
-    tipo_rol = models.CharField(max_length=25, help_text="Usuario, Admin, Soporte, etc")
+    tipo_rol = models.CharField(
+        max_length=25,
+        unique=True,
+        help_text="Chamán (Admin), Guardián (Soporte), Aprendíz, Forastero (Usuario)"
+    )
 
     ROLES_INICIALES = [
-        (1, "Chamán"),
-        (2, "Guardián"),
-        (3, "Visitante"),
+        (1, "Chamán"),     # Admin
+        (2, "Guardián"),   # Soporte
+        (3, "Aprendíz"),   # En formación
+        (4, "Forastero"),  # Usuario
     ]
 
     def __str__(self):
-        return self.tipo_rol
+        return f"{self.tipo_rol}"
+
+    @classmethod
+    def get_rol_por_nombre(cls, nombre):
+        return cls.objects.filter(tipo_rol=nombre).first()
+
+    @classmethod
+    def inicializar_roles(cls):
+        for id_rol, tipo in cls.ROLES_INICIALES:
+            cls.objects.get_or_create(id_rol=id_rol, defaults={'tipo_rol': tipo})
+
 
 
 class Usuario(models.Model):
