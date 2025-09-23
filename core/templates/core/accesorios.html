@@ -1,0 +1,49 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+<section class="container my-5">
+  <h1 class="text-center mb-4">Accesorios Totémicos</h1>
+
+<form method="get" class="row g-3 mb-4">
+  <div class="col-md-4">
+    <select name="juego" class="form-select">
+      <option value="">Todos los juegos</option>
+      <option value="pokemon">Pokémon</option>
+      <option value="yugioh">Yu-Gi-Oh!</option>
+      <option value="mitosyleyendas">Mitos y Leyendas</option>
+    </select>
+  </div>
+  <div class="col-md-4">
+    <select name="tipo" class="form-select">
+      <option value="">Todos los tipos</option>
+      <option value="portamazo">Portamazo</option>
+      <option value="tapete">Tapete</option>
+      <option value="funda">Funda de cartas</option>
+      <option value="moneda">Moneda Pokémon</option>
+      <option value="oro">Oro holográfico</option>
+      <option value="plushie">Plushie Pokémon</option>
+    </select>
+  </div>
+  <div class="col-md-4">
+    <button type="submit" class="btn btn-success w-100">Filtrar</button>
+  </div>
+</form>
+
+
+  <div class="row">
+    {% for producto in accesorios %}
+    <div class="col-6 col-md-4 col-lg-3 mb-4">
+      <a href="{% url 'detalle_producto' producto.id_producto %}" class="text-decoration-none text-dark">
+        <div class="card h-100 border-0 shadow-sm">
+          <img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.nombre }}">
+          <div class="card-body text-center">
+            <h6 class="card-title mb-1">{{ producto.nombre }}</h6>
+            <p class="mb-0"><strong>${{ producto.precio_unitario }}</strong></p>
+          </div>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
