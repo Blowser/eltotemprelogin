@@ -8,7 +8,7 @@ django.setup()
 from django.contrib.auth.models import User
 
 username = "admin"  # cámbialo si tu superuser tiene otro nombre
-new_password = "Grupo3ProyectoTitulo"
+new_password = "admin"
 
 try:
     user = User.objects.get(username=username)
