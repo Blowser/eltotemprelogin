@@ -4,6 +4,16 @@ class Rol(models.Model):
     id_rol = models.AutoField(primary_key=True)
     tipo_rol = models.CharField(max_length=25, help_text="Usuario, Admin, Soporte, etc")
 
+    ROLES_INICIALES = [
+        (1, "Chamán"),
+        (2, "Guardián"),
+        (3, "Visitante"),
+    ]
+
+    def __str__(self):
+        return self.tipo_rol
+
+
 class Usuario(models.Model):
     id_usuario = models.AutoField(primary_key=True)
     nombre_usuario = models.CharField(max_length=20)
