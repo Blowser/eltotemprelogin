@@ -36,7 +36,7 @@
           {% if producto.imagen %}
             <img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.nombre }}">
           {% else %}
-            <img src="{% static 'core/img/placeholder.webp' %}" class="card-img-top" alt="Sin imagen">
+            <img src="{% static 'core/img/imagen_no_disponible.png' %}" class="card-img-top" alt="Sin imagen">
           {% endif %}
           <div class="card-body text-center">
             <h6 class="card-title mb-1">{{ producto.nombre }}</h6>
