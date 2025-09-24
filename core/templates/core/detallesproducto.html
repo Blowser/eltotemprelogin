@@ -6,7 +6,7 @@
     <div class="col-md-6">
       {% with 'core/img/productos/'|add:producto.slug|add:'.webp' as ruta_img %}
         <img src="{% static ruta_img %}" class="img-fluid rounded shadow" alt="{{ producto.nombre }}"
-             onerror="this.onerror=null;this.src='{% static 'core/img/placeholder.webp' %}';">
+             onerror="this.onerror=null;this.src='{% static 'core/img/placeholder.png' %}';">
       {% endwith %}
     </div>
     <div class="col-md-6">
