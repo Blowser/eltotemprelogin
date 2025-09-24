@@ -7,7 +7,7 @@
       {% if producto.imagen %}
         <img src="{{ producto.imagen.url }}" class="img-fluid rounded shadow" alt="{{ producto.nombre }}">
       {% else %}
-        <img src="{% static 'core/img/imagen_no_disponible.png' %}" class="img-fluid rounded shadow" alt="Sin imagen">
+        <img src="{% static 'core/img/placeholder.png' %}" class="img-fluid rounded shadow" alt="Sin imagen">
       {% endif %}
 
     </div>
