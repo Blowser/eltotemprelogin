@@ -36,7 +36,7 @@
         <div class="card h-100 border-0 shadow-sm">
           {% with 'core/img/productos/'|add:producto.slug|add:'.webp' as ruta_img %}
             <img src="{% static ruta_img %}" class="card-img-top" alt="{{ producto.nombre }}"
-                 onerror="this.onerror=null;this.src='{% static 'core/img/placeholder.webp' %}';">
+                 onerror="this.onerror=null;this.src='{% static 'core/img/placeholder.png' %}';">
           {% endwith %}
           <div class="card-body text-center">
             <h6 class="card-title mb-1">{{ producto.nombre }}</h6>
