@@ -19,13 +19,11 @@ class Command(BaseCommand):
 
         for filename in archivos:
             if filename.endswith(".webp"):
-                nombre_base = filename.replace(".webp", "").replace("_", " ").strip().lower()
-                self.stdout.write(f"🔎 Buscando productos que contengan: '{nombre_base}'")
+                nombre_base = filename.replace(".webp", "").replace("_", "-").strip().lower()
+                self.stdout.write(f"🔎 Buscando producto con slug exacto: '{nombre_base}'")
 
-                posibles = Producto.objects.filter(nombre__icontains=nombre_base)
-                self.stdout.write(f"📊 Productos encontrados: {posibles.count()}")
-
-                for producto in posibles:
+                try:
+                    producto = Producto.objects.get(slug=nombre_base)
                     if not producto.imagen:
                         file_path = os.path.join(media_path, filename)
                         with open(file_path, "rb") as f:
@@ -33,5 +31,9 @@ class Command(BaseCommand):
                             producto.save()
                             asignados += 1
                             self.stdout.write(self.style.SUCCESS(f"🖼️ Imagen asignada a: {producto.nombre}"))
+                    else:
+                        self.stdout.write(f"⚠️ Producto '{producto.nombre}' ya tiene imagen")
+                except Producto.DoesNotExist:
+                    self.stdout.write(self.style.ERROR(f"❌ No se encontró producto con slug: '{nombre_base}'"))
 
         self.stdout.write(self.style.WARNING(f"🔮 Total imágenes asignadas: {asignados}"))
