@@ -105,7 +105,7 @@ class Producto(models.Model):
 
     def __str__(self):
         return self.nombre
-    slug = models.SlugField(unique=True, blank=True)
+    slug = models.SlugField(max_length=120, unique=True, blank=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
