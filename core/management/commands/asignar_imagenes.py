@@ -10,7 +10,6 @@ class Command(BaseCommand):
         media_path = os.path.join("media", "productos")
         asignados = 0
 
-        # 🔍 Mostrar qué archivos hay en la carpeta
         try:
             archivos = os.listdir(media_path)
             self.stdout.write(self.style.WARNING(f"📂 Archivos encontrados: {archivos}"))
@@ -20,11 +19,11 @@ class Command(BaseCommand):
 
         for filename in archivos:
             if filename.endswith(".webp"):
-                # 🔍 Mostrar el nombre base que se usará para buscar
-                nombre_base = filename.replace(".webp", "").replace("_", " ").lower()
+                nombre_base = filename.replace(".webp", "").replace("_", " ").strip().lower()
                 self.stdout.write(f"🔎 Buscando productos que contengan: '{nombre_base}'")
 
                 posibles = Producto.objects.filter(nombre__icontains=nombre_base)
+                self.stdout.write(f"📊 Productos encontrados: {posibles.count()}")
 
                 for producto in posibles:
                     if not producto.imagen:
