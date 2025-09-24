@@ -34,7 +34,7 @@
     <div class="col-6 col-md-4 col-lg-3 mb-4">
       <a href="{% url 'detalle_producto' producto.id_producto %}" class="text-decoration-none text-dark">
         <div class="card h-100 border-0 shadow-sm">
-          {% with 'core/img/'|add:producto.slug|add:'.webp' as ruta_img %}
+          {% with 'core/img/productos'|add:producto.slug|add:'.webp' as ruta_img %}
             <img src="{% static ruta_img %}" class="card-img-top" alt="{{ producto.nombre }}"
                  onerror="this.onerror=null;this.src='{% static 'core/img/placeholder.png' %}';">
           {% endwith %}
