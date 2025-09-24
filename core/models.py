@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils.text import slugify
+
 
 class Rol(models.Model):
     id_rol = models.AutoField(primary_key=True)
@@ -103,7 +105,13 @@ class Producto(models.Model):
 
     def __str__(self):
         return self.nombre
+    slug = models.SlugField(unique=True, blank=True)
 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.nombre)
+        super().save(*args, **kwargs)
+        
 class CarroCompras(models.Model):
     id_carro = models.AutoField(primary_key=True)
     total_sin_iva = models.IntegerField()
