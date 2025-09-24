@@ -37,4 +37,3 @@ class Command(BaseCommand):
                     self.stdout.write(self.style.ERROR(f"❌ No se encontró producto con slug: '{nombre_base}'"))
 
         self.stdout.write(self.style.WARNING(f"🔮 Total imágenes asignadas: {asignados}"))
-#ultimos cambios ahre
