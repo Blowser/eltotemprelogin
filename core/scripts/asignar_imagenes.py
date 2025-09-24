@@ -1,14 +1,19 @@
 import os
-from django.core.files import File
+import django
+
+# 🔮 Inicializa Django correctamente
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "ElTotem.settings")
+django.setup()
+
+
 from core.models import Producto
+from django.core.files import File
 
-# Ruta al altar local
 MEDIA_PATH = "media/productos"
+asignados = 0
 
-# Recorremos cada archivo en la carpeta
 for filename in os.listdir(MEDIA_PATH):
     if filename.endswith(".webp"):
-        # Intentamos encontrar un producto cuyo nombre esté contenido en el nombre del archivo
         nombre_base = filename.split("_")[0].lower()
         posibles = Producto.objects.filter(nombre__icontains=nombre_base)
 
@@ -18,4 +23,7 @@ for filename in os.listdir(MEDIA_PATH):
                 with open(file_path, "rb") as f:
                     producto.imagen.save(filename, File(f))
                     producto.save()
+                    asignados += 1
                     print(f"🖼️ Imagen asignada a: {producto.nombre}")
+
+print(f"🔮 Total imágenes asignadas: {asignados}")
