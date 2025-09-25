@@ -15,8 +15,9 @@ DEBUG = True
 
 
 # Dominios permitidos
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,web-production-e97d.up.railway.app')\
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1,web-production-e97d.up.railway.app')\
     .split(',')
+
 
 # Confianza explícita para CSRF
 CSRF_TRUSTED_ORIGINS = [
