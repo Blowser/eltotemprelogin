@@ -86,7 +86,7 @@ else:
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'eltotem_db',
         'USER': 'root',
-        'PASSWORD': '',  # ← poné tu contraseña si tenés una
+        'PASSWORD': 'Gundam333*',  # ← poné tu contraseña si tenés una
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {
