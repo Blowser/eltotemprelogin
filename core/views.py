@@ -374,7 +374,6 @@ def AccesoriosView(request):
  ###VIEWS PARA FORO:
 from django.shortcuts import render, redirect, get_object_or_404
 from core.models import Thread, ForoPost
-from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 
@@ -430,7 +429,7 @@ def crear_post(request, thread_id):
 
 
 
-
+@login_required
 def detalle_thread(request, thread_id):
     hilo = get_object_or_404(Thread, id_thread=thread_id)
     posts = ForoPost.objects.filter(thread=hilo).order_by('fecha_creacion')
