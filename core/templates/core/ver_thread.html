@@ -1,0 +1,11 @@
+<h2>🧵 Hilos del clan</h2>
+<ul>
+  {% for hilo in hilos %}
+    <li>
+      <strong>{{ hilo.titulo }}</strong> — {{ hilo.asunto }}<br>
+      <em>Creado el {{ hilo.fecha_creacion }}</em>
+    </li>
+  {% empty %}
+    <li>No hay hilos aún. El bosque espera su primer fuego.</li>
+  {% endfor %}
+</ul>
