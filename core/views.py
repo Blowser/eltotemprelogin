@@ -108,22 +108,23 @@ def registrarse_view(request):
 # =====================
 # LOGIN
 # =====================
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+
 def login_view(request):
     if request.method == 'POST':
         username = request.POST['username'].strip()
         password = request.POST['password']
 
-        try:
-            usuario = Usuario.objects.get(nombre_usuario=username)
-            if check_password(password, usuario.password):
-                request.session['usuario_id'] = usuario.id
-                return redirect('index')
-            else:
-                return render(request, 'core/login.html', {'error': 'Usuario o contraseña incorrectos'})
-        except Usuario.DoesNotExist:
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('index')  # o 'perfil' si querés ir directo al altar
+        else:
             return render(request, 'core/login.html', {'error': 'Usuario o contraseña incorrectos'})
 
     return render(request, 'core/login.html')
+
 
 
 # Vista para la página "Quiénes somos"
