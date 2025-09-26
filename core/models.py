@@ -220,7 +220,7 @@ class ForoPost(models.Model):
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE)
-    imagen = models.CharField(max_length=200, blank=True, null=True)  # 🔥 Para subir imágenes a los posts
+    imagen = models.ImageField(upload_to='core/img/posts/', blank=True, null=True) # 🔥 Para subir imágenes a los posts
     def __str__(self):
         return f"Post de {self.usuario.nombre} en '{self.thread.titulo}'"
 
