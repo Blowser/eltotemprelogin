@@ -57,6 +57,9 @@ from .models import Usuario, Rol, Direccion
 # =====================
 # REGISTRO
 # =====================
+from django.contrib.auth.models import User
+from django.contrib.auth import login
+
 def registrarse_view(request):
     if request.method == 'POST':
         try:
@@ -75,17 +78,16 @@ def registrarse_view(request):
 
             rol_default, _ = Rol.objects.get_or_create(id_rol=2, defaults={'tipo_rol': 'Usuario'})
 
-            # Guardamos contraseña encriptada manualmente
-            usuario = Usuario.objects.create(
-                nombre_usuario=username,
-                nombre=nombre,
-                apellido=apellido,
+            user = User.objects.create_user(
+                username=username,
                 email=email,
-                rol=rol_default,
-                is_active=True,
-                fecha_creacion=None,
-                password=make_password(password1)
+                password=password1
             )
+            user.first_name = nombre
+            user.last_name = apellido
+            user.save()
+
+            usuario = user.perfil  # gracias a la señal
 
             Direccion.objects.create(
                 direccion=direccion_text,
@@ -94,16 +96,15 @@ def registrarse_view(request):
                 usuario=usuario
             )
 
-            # Logueamos manualmente
+            login(request, user)  # 🔐 Invoca al espíritu en el altar
             request.session['usuario_id'] = usuario.id
             request.session['registro_exitoso'] = f'Usuario registrado exitosamente. Bienvenido "{username}" al Clan'
-            return redirect('index')
+            return redirect('perfil')
 
         except Exception as e:
             return render(request, 'core/registrarse.html', {'error': f'Ocurrió un error inesperado: {e}'})
 
     return render(request, 'core/registrarse.html')
-
 
 # =====================
 # LOGIN
