@@ -11,12 +11,15 @@
 <h3>💬 Respuestas del clan</h3>
 <ul>
   {% for post in posts %}
-    <li>
-      <strong>{{ post.usuario.nombre }}</strong> 
-      <em>({{ post.usuario.rol.tipo_rol }})</em> dijo:<br>
-      {{ post.asunto }}<br>
-      <em>{{ post.fecha_creacion }}</em>
-    </li>
+      <li>
+        <strong>{{ post.usuario.nombre }}</strong> 
+        <em>({{ post.usuario.rol.tipo_rol }})</em> dijo:<br>
+        {{ post.asunto }}<br>
+        {% if post.imagen %}
+          <img src="{{ post.imagen.url }}" alt="Imagen del post" style="max-width:300px;"><br>
+        {% endif %}
+        <em>{{ post.fecha_creacion }}</em>
+      </li>
 
   {% empty %}
     <li>No hay respuestas aún. El fuego espera su primera chispa.</li>
