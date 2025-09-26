@@ -207,7 +207,7 @@ class Thread(models.Model):
 class ForoPost(models.Model):
     id_foro_post = models.AutoField(primary_key=True)
     asunto = models.CharField(max_length=255)
-    fecha_creacion = models.DateField()
+    fecha_creacion = models.DateTimeField()
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE)
 
