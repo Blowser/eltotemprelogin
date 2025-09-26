@@ -197,24 +197,25 @@ class Pago(models.Model):
     fecha_proceso = models.DateField()
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
     metodo_pago = models.ForeignKey(MetodoPago, on_delete=models.CASCADE)
-
+    
+###MODELOS PARA FORO
 class Thread(models.Model):
     id_thread = models.AutoField(primary_key=True)
     titulo = models.CharField(max_length=20)
     asunto = models.CharField(max_length=200)
-    fecha_creacion = models.DateField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
 
 class ForoPost(models.Model):
     id_foro_post = models.AutoField(primary_key=True)
     asunto = models.CharField(max_length=255)
-    fecha_creacion = models.DateTimeField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE)
 
 class ForoReporte(models.Model):
     id_foro_reporte = models.AutoField(primary_key=True)
     motivo = models.CharField(max_length=100)
-    fecha_creacion = models.DateField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
     estado = models.CharField(max_length=15)
     foro_post = models.ForeignKey(ForoPost, on_delete=models.CASCADE)
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
