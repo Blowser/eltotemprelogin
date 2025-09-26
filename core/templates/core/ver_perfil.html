@@ -5,7 +5,7 @@
     <h2 class="text-warning text-center">🧙 Perfil del Chamán</h2>
     <p><strong>Usuario:</strong> {{ usuario.user.username }}</p>
     <p><strong>Nombre:</strong> {{ usuario.nombre }} {{ usuario.apellido }}</p>
-    <p><strong>Rol:</strong> {{ usuario.rol.nombre }}</p>
+    <p><strong>Rol:</strong> {{ usuario.rol.tipo_rol }}</p>
     <p><strong>Fecha de creación:</strong> {{ usuario.fecha_creacion|date:"d M Y H:i" }}</p>
   </div>
 </section>
