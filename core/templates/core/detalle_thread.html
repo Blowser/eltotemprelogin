@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>🔥 Hilo: {{ hilo.titulo }}</h2>
+<p>{{ hilo.asunto }}</p>
+<p><em>Creado el {{ hilo.fecha_creacion }}</em></p>
+
+<hr>
+<h3>💬 Respuestas del clan</h3>
+<ul>
+  {% for post in posts %}
+    <li>
+      <strong>{{ post.usuario.nombre }}</strong> dijo:<br>
+      {{ post.asunto }}<br>
+      <em>{{ post.fecha_creacion }}</em>
+    </li>
+  {% empty %}
+    <li>No hay respuestas aún. El fuego espera su primera chispa.</li>
+  {% endfor %}
+</ul>
+
+<a href="{% url 'crear_post' hilo.id_thread %}" class="btn btn-sm btn-warning mt-3">💬 Responder</a>
+{% endblock %}
