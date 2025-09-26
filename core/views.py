@@ -382,11 +382,12 @@ from core.models import Thread
 @login_required(login_url='/login/')
 
 @login_required
+@login_required
 def crear_thread(request):
     if request.method == 'POST':
         titulo = request.POST.get('titulo')
         asunto = request.POST.get('asunto')
-        imagen = request.FILES.get('imagen')  # 🔥 Capturamos la imagen
+        imagen = request.FILES.get('imagen')
 
         if titulo and asunto:
             Thread.objects.create(
@@ -401,7 +402,6 @@ def crear_thread(request):
             messages.error(request, "⚠️ Faltan inscripciones. El hilo no puede nacer sin título y asunto.")
     return render(request, 'core/crear_thread.html')
 
-
    
 def ver_threads(request):
     hilos = Thread.objects.order_by('-fecha_creacion')
@@ -413,7 +413,7 @@ def crear_post(request, thread_id):
     hilo = get_object_or_404(Thread, id_thread=thread_id)
     if request.method == 'POST':
         asunto = request.POST.get('asunto')
-        imagen = request.FILES.get('imagen')  # 🔥 Para capturar la imagen
+        imagen = request.POST.get('imagen')  # 🔥 Para capturar la imagen
         if asunto:
             ForoPost.objects.create(
                 asunto=asunto,
