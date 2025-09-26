@@ -3,6 +3,10 @@
 {% block content %}
 <h2>🔥 Hilo: {{ hilo.titulo }}</h2>
 <p>{{ hilo.asunto }}</p>
+{% if hilo.imagen %}
+  <img src="{{ hilo.imagen.url }}" alt="Imagen del hilo" class="img-fluid rounded mt-3" style="max-width: 500px;">
+{% endif %}
+
 <p><em>Creado el {{ hilo.fecha_creacion }}</em></p>
 <p><strong>🔥 Iniciado por:</strong> {{ hilo.usuario.user.username }} 
 <em>({{ hilo.usuario.rol.tipo_rol }})</em></p>
