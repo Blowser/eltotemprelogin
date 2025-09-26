@@ -204,6 +204,10 @@ class Thread(models.Model):
     titulo = models.CharField(max_length=20)
     asunto = models.CharField(max_length=200)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"Hilo: {self.titulo}"
+
 
 class ForoPost(models.Model):
     id_foro_post = models.AutoField(primary_key=True)
@@ -211,6 +215,8 @@ class ForoPost(models.Model):
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE)
+    def __str__(self):
+        return f"Post de {self.usuario.nombre} en '{self.thread.titulo}'"
 
 class ForoReporte(models.Model):
     id_foro_reporte = models.AutoField(primary_key=True)
@@ -219,6 +225,9 @@ class ForoReporte(models.Model):
     estado = models.CharField(max_length=15)
     foro_post = models.ForeignKey(ForoPost, on_delete=models.CASCADE)
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    def __str__(self):
+        return f"Reporte por {self.usuario.nombre} sobre post #{self.foro_post.id_foro_post}"
+
 
 # Modelo de sección NOTICIAS (ya pobladas)
 
