@@ -366,4 +366,25 @@ def AccesoriosView(request):
     return render(request, 'core/accesorios.html', {'accesorios': accesorios})
 
 
-    
+ ###VIEWS PARA FORO:
+from django.shortcuts import render, redirect
+from core.models import Thread
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def crear_thread(request):
+    if request.method == 'POST':
+        titulo = request.POST.get('titulo')
+        asunto = request.POST.get('asunto')
+        if titulo and asunto:
+            Thread.objects.create(titulo=titulo, asunto=asunto)
+            messages.success(request, "🔥 Hilo creado con éxito. El fuego ha sido encendido.")
+            return redirect('ver_threads')
+        else:
+            messages.error(request, "⚠️ Faltan inscripciones. El hilo no puede nacer sin título y asunto.")
+    return render(request, 'foro/crear_thread.html')
+   
+def ver_threads(request):
+    hilos = Thread.objects.order_by('-fecha_creacion')
+    return render(request, 'foro/ver_threads.html', {'hilos': hilos})
