@@ -108,8 +108,6 @@ def registrarse_view(request):
 # =====================
 # LOGIN
 # =====================
-from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
 
 def login_view(request):
     if request.method == 'POST':
@@ -125,7 +123,16 @@ def login_view(request):
 
     return render(request, 'core/login.html')
 
+# =====================
+# VER PERFIL
+# =====================
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
 
+@login_required
+def ver_perfil(request):
+    usuario = request.user.perfil
+    return render(request, 'core/ver_perfil.html', {'usuario': usuario})
 
 # Vista para la página "Quiénes somos"
 def quienes_somos_view(request):
