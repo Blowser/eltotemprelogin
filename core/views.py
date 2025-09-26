@@ -367,8 +367,8 @@ def AccesoriosView(request):
 
 
  ###VIEWS PARA FORO:
-from django.shortcuts import render, redirect
-from core.models import Thread
+from django.shortcuts import render, redirect, get_object_or_404
+from core.models import Thread, ForoPost
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
@@ -388,3 +388,27 @@ def crear_thread(request):
 def ver_threads(request):
     hilos = Thread.objects.order_by('-fecha_creacion')
     return render(request, 'core/ver_threads.html', {'hilos': hilos})
+
+
+@login_required
+def crear_post(request, thread_id):
+    hilo = get_object_or_404(Thread, id_thread=thread_id)
+    if request.method == 'POST':
+        asunto = request.POST.get('asunto')
+        if asunto:
+            ForoPost.objects.create(
+                asunto=asunto,
+                usuario=request.user.usuario,
+                thread=hilo
+            )
+            messages.success(request, "🔥 Respuesta enviada. El fuego crece.")
+            return redirect('detalle_thread', thread_id=thread_id)
+        else:
+            messages.error(request, "⚠️ El mensaje está vacío. No se puede encender sin palabras.")
+    return render(request, 'core/crear_post.html', {'hilo': hilo})
+
+
+def detalle_thread(request, thread_id):
+    hilo = get_object_or_404(Thread, id_thread=thread_id)
+    posts = ForoPost.objects.filter(thread=hilo).order_by('fecha_creacion')
+    return render(request, 'core/detalle_thread.html', {'hilo': hilo, 'posts': posts})
