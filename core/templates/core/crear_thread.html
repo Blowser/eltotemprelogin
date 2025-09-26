@@ -1,0 +1,11 @@
+<h2>🔥 Crear nuevo hilo</h2>
+<form method="POST">
+  {% csrf_token %}
+  <label for="titulo">Título:</label>
+  <input type="text" name="titulo" required><br>
+
+  <label for="asunto">Asunto:</label>
+  <textarea name="asunto" required></textarea><br>
+
+  <button type="submit">Encender el fuego</button>
+</form>
