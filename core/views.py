@@ -378,10 +378,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 
 from core.models import Thread
+
 @login_required(login_url='/login/')
-
-
-@login_required
 def crear_thread(request):
     if request.method == 'POST':
         titulo = request.POST.get('titulo')
@@ -407,7 +405,7 @@ def ver_threads(request):
     return render(request, 'core/ver_threads.html', {'hilos': hilos})
 
 
-@login_required
+@login_required(login_url='/login/')
 def crear_post(request, thread_id):
     hilo = get_object_or_404(Thread, id_thread=thread_id)
     if request.method == 'POST':
@@ -429,7 +427,7 @@ def crear_post(request, thread_id):
 
 
 
-@login_required
+
 def detalle_thread(request, thread_id):
     hilo = get_object_or_404(Thread, id_thread=thread_id)
     posts = ForoPost.objects.filter(thread=hilo).order_by('fecha_creacion')
