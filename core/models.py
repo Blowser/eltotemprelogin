@@ -205,7 +205,8 @@ class Thread(models.Model):
     asunto = models.CharField(max_length=200)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, null=True)
-    imagen = models.ImageField(upload_to='hilos_imagenes/', blank=True, null=True)
+    imagen = models.ImageField(upload_to='core/img/hilos/', blank=True, null=True)  # 🔥 Guardamos en static
+
 
 
     
@@ -219,7 +220,7 @@ class ForoPost(models.Model):
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE)
-    imagen = models.ImageField(upload_to='foro_imagenes/', blank=True, null=True)  # 🔥 Para subir imágenes a los posts
+    imagen = models.CharField(max_length=200, blank=True, null=True)  # 🔥 Para subir imágenes a los posts
     def __str__(self):
         return f"Post de {self.usuario.nombre} en '{self.thread.titulo}'"
 
