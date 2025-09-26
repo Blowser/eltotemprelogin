@@ -205,6 +205,8 @@ class Thread(models.Model):
     asunto = models.CharField(max_length=200)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, null=True)
+    imagen = models.ImageField(upload_to='hilos_imagenes/', blank=True, null=True)
+
 
     
     def __str__(self):
