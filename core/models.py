@@ -48,15 +48,49 @@ class Usuario(models.Model):
         return f"{self.nombre} {self.apellido} ({self.user.username})"
 
 
-
+###MODELO PARA JUEGOS CON VALORES INICIALES
 class Juego(models.Model):
-    nombre = models.CharField(max_length=50)
+    nombre = models.CharField(max_length=50, unique=True)
     descripcion = models.CharField(max_length=255)
     desarrollador = models.CharField(max_length=50)
     sitio_web = models.CharField(max_length=255, help_text="Enlace al sitio web del juego")
 
+    JUEGOS_INICIALES = [
+        {
+            "nombre": "pokemon tcg",
+            "descripcion": "Juego de cartas coleccionables de Pokémon",
+            "desarrollador": "pokemon company",
+            "sitio_web": "https://www.pokemon.com/us/pokemon-news"
+        },
+        {
+            "nombre": "yugioh",
+            "descripcion": "Duelo de monstruos con cartas mágicas y trampas",
+            "desarrollador": "konami",
+            "sitio_web": "https://www.yugioh-card.com/"
+        },
+        {
+            "nombre": "mitosyleyendas",
+            "descripcion": "Juego chileno de cartas con mitología y cultura",
+            "desarrollador": "KLU",
+            "sitio_web": "https://casamyl.cl/blogs/myl"
+        },
+    ]
+
     def __str__(self):
         return self.nombre
+
+    @classmethod
+    def inicializar_juegos(cls):
+        for juego in cls.JUEGOS_INICIALES:
+            cls.objects.get_or_create(
+                nombre=juego["nombre"],
+                defaults={
+                    "descripcion": juego["descripcion"],
+                    "desarrollador": juego["desarrollador"],
+                    "sitio_web": juego["sitio_web"]
+                }
+            )
+
 
 
 class Edicion(models.Model):
