@@ -381,24 +381,26 @@ from django.shortcuts import redirect
 from core.models import Thread
 @login_required(login_url='/login/')
 
+@login_required
 def crear_thread(request):
-    if not request.user.is_authenticated:
-        messages.error(request, "⚠️ Debes estar logeado para ver el foro.")
-        return redirect('login')
     if request.method == 'POST':
         titulo = request.POST.get('titulo')
         asunto = request.POST.get('asunto')
+        imagen = request.FILES.get('imagen')  # 🔥 Capturamos la imagen
+
         if titulo and asunto:
             Thread.objects.create(
                 titulo=titulo,
                 asunto=asunto,
-                usuario=request.user.perfil  # 🔥 el portador del fuego
+                usuario=request.user.perfil,
+                imagen=imagen
             )
-            messages.success(request, "🔥 Hilo creado con éxito. El fuego ha sido encendido.")
+            messages.success(request, "🔥 Hilo creado con imagen. El fuego ha sido encendido.")
             return redirect('ver_threads')
         else:
             messages.error(request, "⚠️ Faltan inscripciones. El hilo no puede nacer sin título y asunto.")
     return render(request, 'core/crear_thread.html')
+
 
    
 def ver_threads(request):
