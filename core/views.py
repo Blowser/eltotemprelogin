@@ -371,11 +371,15 @@ from django.shortcuts import render, redirect, get_object_or_404
 from core.models import Thread, ForoPost
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
+from django.shortcuts import redirect
 
 from core.models import Thread
-@login_required
+@login_required(login_url='/login/')
+
 def crear_thread(request):
+    if not request.user.is_authenticated:
+        messages.error(request, "⚠️ Debes estar logeado para ver el foro.")
+        return redirect('login')
     if request.method == 'POST':
         titulo = request.POST.get('titulo')
         asunto = request.POST.get('asunto')
