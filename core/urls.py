@@ -2,7 +2,7 @@
 
 from django.urls import path
 from . import views
-from .views import ProductosView, AccesoriosView, crear_thread, ver_threads
+from .views import ProductosView, AccesoriosView, crear_thread, ver_threads, crear_post, detalle_thread
 from django.contrib.auth import views as auth_views
 
 
@@ -20,5 +20,8 @@ urlpatterns = [
     path('accesorios/', AccesoriosView, name='accesorios'),
     path('foro/crear/', crear_thread, name='crear_thread'),
     path('foro/', ver_threads, name='ver_threads'),
+    path('foro/<int:thread_id>/responder/', crear_post, name='crear_post'),
+    path('foro/<int:thread_id>/', detalle_thread, name='detalle_thread'),
+
     
 ]
