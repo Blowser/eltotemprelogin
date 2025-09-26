@@ -1,11 +1,26 @@
 {% extends 'core/base.html' %}
 
 {% block content %}
+
 <h2>🔥 Responder al hilo: {{ hilo.titulo }}</h2>
+
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+        {{ message }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
 <form method="POST">
   {% csrf_token %}
-  <label for="asunto">Tu mensaje:</label>
-  <textarea name="asunto" required></textarea><br>
-  <button type="submit">Enviar chispa</button>
+  <label for="asunto">Tu mensaje:</label><br>
+  <textarea name="asunto" rows="4" cols="50" required></textarea><br><br>
+  <button type="submit" class="btn btn-primary">💬 Enviar chispa</button>
 </form>
+
+<a href="{% url 'detalle_thread' hilo.id_thread %}" class="btn btn-secondary mt-3">⬅️ Volver al hilo</a>
+
 {% endblock %}
