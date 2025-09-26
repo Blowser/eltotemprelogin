@@ -381,7 +381,7 @@ from django.shortcuts import redirect
 from core.models import Thread
 @login_required(login_url='/login/')
 
-@login_required
+
 @login_required
 def crear_thread(request):
     if request.method == 'POST':
@@ -413,18 +413,21 @@ def crear_post(request, thread_id):
     hilo = get_object_or_404(Thread, id_thread=thread_id)
     if request.method == 'POST':
         asunto = request.POST.get('asunto')
-        imagen = request.FILES.get('imagen')  # 🔥 Para capturar la imagen
+        imagen = request.FILES.get('imagen')  # 🔥 Captura la imagen
+
         if asunto:
             ForoPost.objects.create(
                 asunto=asunto,
-                usuario=request.user.perfil,  
-                thread=hilo
+                usuario=request.user.perfil,
+                thread=hilo,
+                imagen=imagen  # 🔥 Aquí la pasamos al modelo
             )
-            messages.success(request, "🔥 Respuesta enviada. El fuego crece.")
+            messages.success(request, "🔥 Respuesta enviada con imagen. El fuego crece.")
             return redirect('detalle_thread', thread_id=thread_id)
         else:
             messages.error(request, "⚠️ El mensaje está vacío. No se puede encender sin palabras.")
     return render(request, 'core/crear_post.html', {'hilo': hilo})
+
 
 
 
