@@ -23,14 +23,26 @@
   <div class="search-container">
     <input type="text" placeholder="Buscar...">
   </div>
-  <div class="user-actions">
-    <a href="{% url 'login' %}">Ingresar</a>
-    <a href="#">🛒 Carrito</a>
-    {% if user.is_staff %}
-      <a href="/admin/">⚙️ Panel Admin</a>
-    {% endif %}
-    <button id="toggle-modo" class="btn btn-sm btn-outline-warning">🌓 Cambiar modo</button>
-  </div>
+<div class="user-actions d-flex align-items-center gap-3">
+  {% if user.is_authenticated %}
+    <span class="text-warning fw-bold">
+      🔸 Bienvenido, {{ user.username }}
+    </span>
+    <a href="{% url 'ver_perfil' %}" class="btn btn-sm btn-outline-light">👤 Perfil</a>
+    <a href="{% url 'logout' %}" class="btn btn-sm btn-outline-warning">Salir</a>
+  {% else %}
+    <a href="{% url 'login' %}" class="btn btn-sm btn-warning">Ingresar</a>
+  {% endif %}
+
+  <a href="#" class="btn btn-sm btn-outline-light">🛒 Carrito</a>
+
+  {% if user.is_staff %}
+    <a href="/admin/" class="btn btn-sm btn-outline-light">⚙️ Panel Admin</a>
+  {% endif %}
+
+  <button id="toggle-modo" class="btn btn-sm btn-outline-warning">🌓 Cambiar modo</button>
+</div>
+
 </div>
 
 <header class="navbar">
