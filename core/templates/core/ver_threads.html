@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+
+{% block content %}
 <h2>🧵 Hilos del clan</h2>
 <ul>
   {% for hilo in hilos %}
@@ -9,3 +12,4 @@
     <li>No hay hilos aún. El bosque espera su primer fuego.</li>
   {% endfor %}
 </ul>
+{% endblock %}
