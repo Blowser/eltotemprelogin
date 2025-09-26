@@ -383,8 +383,8 @@ def crear_thread(request):
             return redirect('ver_threads')
         else:
             messages.error(request, "⚠️ Faltan inscripciones. El hilo no puede nacer sin título y asunto.")
-    return render(request, 'foro/crear_thread.html')
+    return render(request, 'core/crear_thread.html')
    
 def ver_threads(request):
     hilos = Thread.objects.order_by('-fecha_creacion')
-    return render(request, 'foro/ver_threads.html', {'hilos': hilos})
+    return render(request, 'core/ver_threads.html', {'hilos': hilos})
