@@ -411,10 +411,11 @@ def crear_post(request, thread_id):
     hilo = get_object_or_404(Thread, id_thread=thread_id)
     if request.method == 'POST':
         asunto = request.POST.get('asunto')
+        imagen = request.FILES.get('imagen')  # 🔥 Para capturar la imagen
         if asunto:
             ForoPost.objects.create(
                 asunto=asunto,
-                usuario=request.user.perfil,  # 🔥 Aquí está el vínculo correcto
+                usuario=request.user.perfil,  
                 thread=hilo
             )
             messages.success(request, "🔥 Respuesta enviada. El fuego crece.")
