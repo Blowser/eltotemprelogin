@@ -110,6 +110,7 @@ def registrarse_view(request):
 # LOGIN
 # =====================
 from django.contrib import messages
+from django.shortcuts import redirect
 def login_view(request):
     if request.method == 'POST':
         username = request.POST['username'].strip()
