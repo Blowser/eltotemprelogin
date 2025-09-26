@@ -5,7 +5,10 @@
 <ul>
   {% for hilo in hilos %}
     <li>
-      <strong>{{ hilo.titulo }}</strong> — {{ hilo.asunto }}<br>
+      <a href="{% url 'detalle_thread' hilo.id_thread %}">
+        <strong>{{ hilo.titulo }}</strong>
+      </a> — {{ hilo.asunto }}<br>
+
       <em>Creado el {{ hilo.fecha_creacion }}</em>
     </li>
   {% empty %}
