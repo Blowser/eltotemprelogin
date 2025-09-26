@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>🔥 Responder al hilo: {{ hilo.titulo }}</h2>
+<form method="POST">
+  {% csrf_token %}
+  <label for="asunto">Tu mensaje:</label>
+  <textarea name="asunto" required></textarea><br>
+  <button type="submit">Enviar chispa</button>
+</form>
+{% endblock %}
