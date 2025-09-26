@@ -19,9 +19,10 @@
         <strong>{{ post.usuario.nombre }}</strong> 
         <em>({{ post.usuario.rol.tipo_rol }})</em> dijo:<br>
         {{ post.asunto }}<br>
-        {% if post.imagen %}
-          <img src="{{ post.imagen.url }}" alt="Imagen del post" style="max-width:300px;"><br>
+        {% if hilo.imagen %}
+          <img src="{{ hilo.imagen.url }}" alt="Imagen del hilo" class="img-fluid rounded mt-3" style="max-width: 500px;">
         {% endif %}
+
         <em>{{ post.fecha_creacion }}</em>
       </li>
 
