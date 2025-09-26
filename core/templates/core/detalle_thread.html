@@ -4,8 +4,8 @@
 <h2>🔥 Hilo: {{ hilo.titulo }}</h2>
 <p>{{ hilo.asunto }}</p>
 <p><em>Creado el {{ hilo.fecha_creacion }}</em></p>
-<p><strong>🔥 Iniciado por:</strong> {{ hilo.usuario.nombre }}</p>
-
+<p><strong>🔥 Iniciado por:</strong> {{ hilo.usuario.user.username }} 
+<em>({{ hilo.usuario.rol.tipo_rol }})</em></p>
 
 <hr>
 <h3>💬 Respuestas del clan</h3>
