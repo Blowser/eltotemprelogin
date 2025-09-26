@@ -2,13 +2,17 @@
 
 {% block content %}
 <h2>🔥 Crear nuevo hilo</h2>
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
   {% csrf_token %}
+
   <label for="titulo">Título:</label>
   <input type="text" name="titulo" required><br>
 
   <label for="asunto">Asunto:</label>
   <textarea name="asunto" required></textarea><br>
+
+  <label for="imagen">Imagen del hilo (opcional):</label>
+  <input type="file" name="imagen" accept="image/*"><br>
 
   <button type="submit">Encender el fuego</button>
 </form>
