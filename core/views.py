@@ -372,18 +372,25 @@ from core.models import Thread, ForoPost
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
+
+from core.models import Thread
 @login_required
 def crear_thread(request):
     if request.method == 'POST':
         titulo = request.POST.get('titulo')
         asunto = request.POST.get('asunto')
         if titulo and asunto:
-            Thread.objects.create(titulo=titulo, asunto=asunto)
+            Thread.objects.create(
+                titulo=titulo,
+                asunto=asunto,
+                usuario=request.user.perfil  # 🔥 el portador del fuego
+            )
             messages.success(request, "🔥 Hilo creado con éxito. El fuego ha sido encendido.")
             return redirect('ver_threads')
         else:
             messages.error(request, "⚠️ Faltan inscripciones. El hilo no puede nacer sin título y asunto.")
     return render(request, 'core/crear_thread.html')
+
    
 def ver_threads(request):
     hilos = Thread.objects.order_by('-fecha_creacion')
