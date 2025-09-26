@@ -14,12 +14,17 @@
   </ul>
 {% endif %}
 
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
   {% csrf_token %}
   <label for="asunto">Tu mensaje:</label><br>
   <textarea name="asunto" rows="4" cols="50" required></textarea><br><br>
+
+  <label for="imagen">Adjuntar imagen:</label><br>
+  <input type="file" name="imagen" accept="image/*"><br><br>
+
   <button type="submit" class="btn btn-primary">💬 Enviar chispa</button>
 </form>
+
 
 <a href="{% url 'detalle_thread' hilo.id_thread %}" class="btn btn-secondary mt-3">⬅️ Volver al hilo</a>
 
