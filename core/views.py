@@ -110,7 +110,9 @@ def registrarse_view(request):
 # LOGIN
 # =====================
 from django.contrib import messages
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
+from django.contrib.auth import authenticate, login
+
 def login_view(request):
     if request.method == 'POST':
         username = request.POST['username'].strip()
@@ -121,9 +123,11 @@ def login_view(request):
             login(request, user)
             return redirect('index')  # o 'perfil' si querés ir directo al altar
         else:
-            return render(request, 'core/login.html', {'error': 'Usuario o contraseña incorrectos'})
+            messages.error(request, "⚠️ Usuario o contraseña incorrectos.")
+            return redirect('login')  # 🔥 redirige para que el mensaje se muestre
 
     return render(request, 'core/login.html')
+
 
 # =====================
 # VER PERFIL
