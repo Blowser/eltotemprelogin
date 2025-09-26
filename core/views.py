@@ -398,7 +398,7 @@ def crear_post(request, thread_id):
         if asunto:
             ForoPost.objects.create(
                 asunto=asunto,
-                usuario=request.user,
+                usuario=request.user.perfil,  # 🔥 Aquí está el vínculo correcto
                 thread=hilo
             )
             messages.success(request, "🔥 Respuesta enviada. El fuego crece.")
@@ -406,6 +406,7 @@ def crear_post(request, thread_id):
         else:
             messages.error(request, "⚠️ El mensaje está vacío. No se puede encender sin palabras.")
     return render(request, 'core/crear_post.html', {'hilo': hilo})
+
 
 
 def detalle_thread(request, thread_id):
