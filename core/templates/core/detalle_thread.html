@@ -4,16 +4,20 @@
 <h2>🔥 Hilo: {{ hilo.titulo }}</h2>
 <p>{{ hilo.asunto }}</p>
 <p><em>Creado el {{ hilo.fecha_creacion }}</em></p>
+<p><strong>🔥 Iniciado por:</strong> {{ hilo.usuario.user.username }}</p>
+
 
 <hr>
 <h3>💬 Respuestas del clan</h3>
 <ul>
   {% for post in posts %}
     <li>
-      <strong>{{ post.usuario.nombre }}</strong> dijo:<br>
+      <strong>{{ post.usuario.nombre }}</strong> 
+      <em>({{ post.usuario.rol.tipo_rol }})</em> dijo:<br>
       {{ post.asunto }}<br>
       <em>{{ post.fecha_creacion }}</em>
     </li>
+
   {% empty %}
     <li>No hay respuestas aún. El fuego espera su primera chispa.</li>
   {% endfor %}
