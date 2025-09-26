@@ -10,6 +10,9 @@
     </li>
   {% empty %}
     <li>No hay hilos aún. El bosque espera su primer fuego.</li>
+
   {% endfor %}
 </ul>
+
+    <a href="{% url 'crear_thread' %}" class="btn btn-warning">🔥 Crear nuevo hilo</a>
 {% endblock %}
