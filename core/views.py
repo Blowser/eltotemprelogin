@@ -398,7 +398,7 @@ def crear_post(request, thread_id):
         if asunto:
             ForoPost.objects.create(
                 asunto=asunto,
-                usuario=request.user.usuario,
+                usuario=request.user,
                 thread=hilo
             )
             messages.success(request, "🔥 Respuesta enviada. El fuego crece.")
