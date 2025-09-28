@@ -22,6 +22,9 @@ urlpatterns = [
     path('foro/', ver_threads, name='ver_threads'),
     path('foro/<int:thread_id>/responder/', crear_post, name='crear_post'),
     path('foro/<int:thread_id>/', detalle_thread, name='detalle_thread'),
+    path('carrito/agregar/<int:producto_id>/', views.agregar_al_carrito, name='agregar_al_carrito'),
+    path('carrito/', views.ver_carrito, name='ver_carrito'),
+
 
     
 ]
