@@ -38,7 +38,8 @@
     <a href="{% url 'login' %}" class="btn btn-sm btn-warning">Ingresar</a>
   {% endif %}
 
-  <a href="#" class="btn btn-sm btn-outline-light">🛒 Carrito</a>
+  <a href="{% url 'ver_carrito' %}" class="btn btn-sm btn-outline-light">🛒 Carrito</a>
+
 
   {% if user.is_staff %}
     <a href="/admin/" class="btn btn-sm btn-outline-light">⚙️ Panel Admin</a>
