@@ -486,3 +486,14 @@ def ver_carrito(request):
         'iva': iva,
         'precio_final': precio_final
     })
+
+@login_required(login_url='login')
+def eliminar_item_carrito(request, item_id):
+    item = get_object_or_404(ItemEnCarro, id_item=item_id, carro__usuario=request.user.perfil)
+    item.delete()
+
+    # Actualizar totales del carrito
+    item.carro.actualizar_totales()
+
+    messages.success(request, f"🧹 Se eliminó {item.producto.nombre} del carrito.")
+    return redirect('ver_carrito')
