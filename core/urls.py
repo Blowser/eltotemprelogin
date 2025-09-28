@@ -24,7 +24,6 @@ urlpatterns = [
     path('foro/<int:thread_id>/', detalle_thread, name='detalle_thread'),
     path('carrito/agregar/<int:producto_id>/', views.agregar_al_carrito, name='agregar_al_carrito'),
     path('carrito/', views.ver_carrito, name='ver_carrito'),
-
-
+    path('carrito/eliminar/<int:item_id>/', views.eliminar_item_carrito, name='eliminar_item_carrito'),
     
 ]
