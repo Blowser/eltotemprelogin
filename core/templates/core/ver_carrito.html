@@ -29,6 +29,7 @@
       <p><strong>Total sin IVA:</strong> ${{ total }}</p>
       <p><strong>IVA (19%):</strong> ${{ iva }}</p>
       <p><strong>Precio Final:</strong> ${{ precio_final }}</p>
+      <a href="{% url 'productos' %}" class="btn btn-outline-light me-2">← Seguir explorando</a>
       <a href="#" class="btn btn-warning">Finalizar compra</a>
     </div>
   {% else %}
