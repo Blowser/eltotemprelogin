@@ -15,9 +15,15 @@
       <p>{{ producto.descripcion }}</p>
       <p><strong>Precio:</strong> ${{ producto.precio_unitario }}</p>
       <p><strong>Stock:</strong> {{ producto.stock_total }}</p>
-      <a href="{% url 'agregar_al_carrito' producto.id_producto %}" class="btn btn-success">
-  🛒 Agregar al carrito
-</a>
+      <form method="post" action="{% url 'agregar_al_carrito' producto.id_producto %}">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="cantidad" class="form-label">Cantidad:</label>
+          <input type="number" name="cantidad" id="cantidad" value="1" min="1" max="{{ producto.stock_total }}" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-success">🛒 Agregar al carrito</button>
+      </form>
+
 
       <a href="{% url 'productos' %}" class="btn btn-outline-secondary mt-3">← Volver al catálogo</a>
     </div>
