@@ -432,3 +432,50 @@ def detalle_thread(request, thread_id):
     hilo = get_object_or_404(Thread, id_thread=thread_id)
     posts = ForoPost.objects.filter(thread=hilo).order_by('fecha_creacion')
     return render(request, 'core/detalle_thread.html', {'hilo': hilo, 'posts': posts})
+
+###VIEWS DE CARRITO
+from core.models import CarroCompras, ItemEnCarro, Producto
+from datetime import datetime
+
+@login_required(login_url='login')
+def agregar_al_carrito(request, producto_id):
+    producto = get_object_or_404(Producto, id_producto=producto_id)
+
+    carro, creado = CarroCompras.objects.get_or_create(
+        usuario=request.user.perfil,
+        fecha_uso=datetime.now()
+    )
+
+    item, creado = ItemEnCarro.objects.get_or_create(
+        carro=carro,
+        producto=producto,
+        defaults={
+            'cantidad_items': 1,
+            'precio_unitario': producto.precio_unitario,
+            'total_sin_iva': producto.precio_unitario,
+            'fecha_uso': datetime.now()
+        }
+    )
+
+    if not creado:
+        item.cantidad_items += 1
+        item.total_sin_iva = item.cantidad_items * item.precio_unitario
+        item.save()
+
+    messages.success(request, "🛒 Producto agregado al carrito.")
+    return redirect('ver_carrito')
+
+@login_required(login_url='login')
+def ver_carrito(request):
+    carro = CarroCompras.objects.filter(usuario=request.user.perfil).order_by('-fecha_uso').first()
+    items = ItemEnCarro.objects.filter(carro=carro) if carro else []
+    total = sum(item.total_sin_iva for item in items)
+    iva = int(total * 0.19)
+    precio_final = total + iva
+
+    return render(request, 'core/ver_carrito.html', {
+        'items': items,
+        'total': total,
+        'iva': iva,
+        'precio_final': precio_final
+    })
