@@ -2,7 +2,7 @@
 
 from django.urls import path
 from . import views
-from .views import ProductosView, AccesoriosView, crear_thread, ver_threads, crear_post, detalle_thread
+from .views import ProductosView, AccesoriosView, crear_thread, ver_threads, crear_post, detalle_thread, ver_carrito
 from django.contrib.auth import views as auth_views
 
 
