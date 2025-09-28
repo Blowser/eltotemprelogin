@@ -4,34 +4,41 @@
   <h2 class="mb-4">🛒 Tu Carrito Totémico</h2>
 
   {% if items %}
-    <table class="table table-dark table-bordered">
-      <thead>
-        <tr>
-          <th>Producto</th>
-          <th>Cantidad</th>
-          <th>Precio Unitario</th>
-          <th>Subtotal</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for item in items %}
-        <tr>
-          <td>{{ item.producto.nombre }}</td>
-          <td>{{ item.cantidad_items }}</td>
-          <td>${{ item.precio_unitario }}</td>
-          <td>${{ item.total_sin_iva }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+  <table class="table table-dark table-bordered">
+    <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Precio Unitario</th>
+        <th>Subtotal</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in items %}
+      <tr>
+        <td>{{ item.producto.nombre }}</td>
+        <td>{{ item.cantidad_items }}</td>
+        <td>${{ item.precio_unitario }}</td>
+        <td>${{ item.total_sin_iva }}</td>
+        <td>
+          <a href="{% url 'eliminar_item_carrito' item.id_item %}" class="btn btn-sm btn-outline-danger">
+            🗑️ Eliminar
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 
-    <div class="text-end">
-      <p><strong>Total sin IVA:</strong> ${{ total }}</p>
-      <p><strong>IVA (19%):</strong> ${{ iva }}</p>
-      <p><strong>Precio Final:</strong> ${{ precio_final }}</p>
-      <a href="{% url 'productos' %}" class="btn btn-outline-light me-2">← Seguir explorando</a>
-      <a href="#" class="btn btn-warning">Finalizar compra</a>
-    </div>
+  <div class="text-end">
+    <p><strong>Total sin IVA:</strong> ${{ total }}</p>
+    <p><strong>IVA (19%):</strong> ${{ iva }}</p>
+    <p><strong>Precio Final:</strong> ${{ precio_final }}</p>
+
+    <a href="{% url 'productos' %}" class="btn btn-outline-light me-2">← Seguir explorando</a>
+    <a href="#" class="btn btn-warning">Finalizar compra</a>
+  </div>
   {% else %}
     <p class="text-muted">Tu carrito está vacío. El altar espera tus reliquias.</p>
   {% endif %}
