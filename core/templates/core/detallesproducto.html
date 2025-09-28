@@ -15,7 +15,10 @@
       <p>{{ producto.descripcion }}</p>
       <p><strong>Precio:</strong> ${{ producto.precio_unitario }}</p>
       <p><strong>Stock:</strong> {{ producto.stock_total }}</p>
-      <a href="#" class="btn btn-success">Agregar al carrito</a>
+      <a href="{% url 'agregar_al_carrito' producto.id_producto %}" class="btn btn-success">
+  🛒 Agregar al carrito
+</a>
+
       <a href="{% url 'productos' %}" class="btn btn-outline-secondary mt-3">← Volver al catálogo</a>
     </div>
   </div>
