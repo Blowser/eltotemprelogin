@@ -434,7 +434,7 @@ def detalle_thread(request, thread_id):
     return render(request, 'core/detalle_thread.html', {'hilo': hilo, 'posts': posts})
 
 ###VIEWS DE CARRITO
-from core.models import CarroCompras, ItemEnCarro, Producto
+from core.models import CarroCompras, ItemEnCarro, Producto, Pedido, MetodoPago, Pago
 from datetime import datetime
 
 @login_required(login_url='login')
@@ -497,3 +497,40 @@ def eliminar_item_carrito(request, item_id):
 
     messages.success(request, f"🧹 Se eliminó {item.producto.nombre} del carrito.")
     return redirect('ver_carrito')
+
+@login_required(login_url='login')
+def finalizar_compra(request):
+    perfil = request.user.perfil
+    carro = CarroCompras.objects.filter(usuario=perfil).order_by('-fecha_uso').first()
+    direccion = Direccion.objects.filter(usuario=perfil).first()
+    metodo = MetodoPago.objects.filter(usuario=perfil).first()
+
+    if not carro or not direccion or not metodo:
+        messages.error(request, "Falta dirección, método de pago o carrito.")
+        return redirect('ver_carrito')
+
+    total = carro.total_sin_iva
+    iva = carro.iva_compra
+    precio_final = carro.precio_final
+
+    pedido = Pedido.objects.create(
+        fecha_pedido=datetime.now(),
+        estado_pedido="pendiente",
+        total_sin_iva=total,
+        iva_compra=iva,
+        precio_final=precio_final,
+        usuario=perfil,
+        direccion=direccion,
+        carro=carro
+    )
+
+    Pago.objects.create(
+        monto=precio_final,
+        estado="pendiente",
+        fecha_proceso=datetime.now(),
+        pedido=pedido,
+        metodo_pago=metodo
+    )
+
+    messages.success(request, "🎉 Pedido registrado. El ritual está completo.")
+    return redirect('panel_usuario')  # O donde quieras mostrar el resumen
