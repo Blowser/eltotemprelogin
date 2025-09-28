@@ -186,14 +186,17 @@ class ItemEnCarro(models.Model):
 
 class Direccion(models.Model):
     id_direccion = models.AutoField(primary_key=True)
-    direccion = models.CharField(max_length=50, help_text="Incluye numeración")
+    direccion = models.CharField(max_length=50, help_text="Calle y numeración")
+    numero_dpto_casa = models.CharField(max_length=10, help_text="Número de departamento o casa", null=True, blank=True)
     comuna = models.CharField(max_length=30)
     region = models.CharField(max_length=30)
     codigo_postal = models.IntegerField(null=True, blank=True)
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.direccion}, {self.comuna}, {self.region}"
+        complemento = f", Dpto/Casa {self.numero_dpto_casa}" if self.numero_dpto_casa else ""
+        return f"{self.direccion}{complemento}, {self.comuna}, {self.region}"
+
 
 class Pedido(models.Model):
     id_pedido = models.AutoField(primary_key=True)
