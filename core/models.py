@@ -147,23 +147,42 @@ class Producto(models.Model):
             self.slug = slugify(self.nombre)[:120]
         super().save(*args, **kwargs)
 
-###MODELOS COMPRA:        
+###MODELOS COMPRA:   
+from django.utils import timezone    
 class CarroCompras(models.Model):
     id_carro = models.AutoField(primary_key=True)
-    total_sin_iva = models.IntegerField()
-    iva_compra = models.IntegerField()
-    precio_final = models.FloatField()
-    fecha_uso = models.DateTimeField(help_text="Para trazabilidad")
+    total_sin_iva = models.IntegerField(default=0)
+    iva_compra = models.IntegerField(default=0)
+    precio_final = models.FloatField(default=0.0)
+    fecha_uso = models.DateTimeField(default=timezone.now, help_text="Para trazabilidad")
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+
+    def actualizar_totales(self):
+        items = self.itemencarro_set.all()
+        self.total_sin_iva = sum(item.total_sin_iva for item in items)
+        self.iva_compra = int(self.total_sin_iva * 0.19)
+        self.precio_final = self.total_sin_iva + self.iva_compra
+        self.save()
+
+    def __str__(self):
+        return f"Carro #{self.id_carro} de {self.usuario}"
 
 class ItemEnCarro(models.Model):
     id_item = models.AutoField(primary_key=True)
-    cantidad_items = models.IntegerField()
+    cantidad_items = models.IntegerField(default=1)
     precio_unitario = models.IntegerField()
     total_sin_iva = models.IntegerField()
-    fecha_uso = models.DateTimeField(help_text="Para trazabilidad")
+    fecha_uso = models.DateTimeField(default=timezone.now, help_text="Para trazabilidad")
     carro = models.ForeignKey(CarroCompras, on_delete=models.CASCADE)
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+
+    def save(self, *args, **kwargs):
+        self.total_sin_iva = self.cantidad_items * self.precio_unitario
+        super().save(*args, **kwargs)
+        self.carro.actualizar_totales()
+
+    def __str__(self):
+        return f"{self.cantidad_items} x {self.producto.nombre}"
 
 class Direccion(models.Model):
     id_direccion = models.AutoField(primary_key=True)
@@ -173,16 +192,22 @@ class Direccion(models.Model):
     codigo_postal = models.IntegerField(null=True, blank=True)
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f"{self.direccion}, {self.comuna}, {self.region}"
+
 class Pedido(models.Model):
     id_pedido = models.AutoField(primary_key=True)
-    fecha_pedido = models.DateTimeField()
-    estado_pedido = models.CharField(max_length=20)
+    fecha_pedido = models.DateTimeField(default=timezone.now)
+    estado_pedido = models.CharField(max_length=20, default="pendiente")
     total_sin_iva = models.IntegerField()
     iva_compra = models.IntegerField()
     precio_final = models.IntegerField()
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     direccion = models.ForeignKey(Direccion, on_delete=models.CASCADE)
     carro = models.ForeignKey(CarroCompras, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Pedido #{self.id_pedido} de {self.usuario}"
 
 class MetodoPago(models.Model):
     id_metodo_pago = models.AutoField(primary_key=True)
@@ -191,13 +216,19 @@ class MetodoPago(models.Model):
     estado = models.CharField(max_length=15)
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f"{self.tipo} ({self.estado})"
+
 class Pago(models.Model):
     id_pago = models.AutoField(primary_key=True)
     monto = models.IntegerField()
     estado = models.CharField(max_length=15)
-    fecha_proceso = models.DateField()
+    fecha_proceso = models.DateField(default=timezone.now)
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
     metodo_pago = models.ForeignKey(MetodoPago, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Pago #{self.id_pago} — {self.estado}"
     
 ###MODELOS PARA FORO
 class Thread(models.Model):
