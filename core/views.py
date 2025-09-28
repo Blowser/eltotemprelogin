@@ -440,9 +440,9 @@ from datetime import datetime
 @login_required(login_url='login')
 def agregar_al_carrito(request, producto_id):
     producto = get_object_or_404(Producto, id_producto=producto_id)
+    cantidad = int(request.POST.get('cantidad', 1))
 
     carro = CarroCompras.objects.filter(usuario=request.user.perfil).order_by('-fecha_uso').first()
-
     if not carro:
         carro = CarroCompras.objects.create(
             usuario=request.user.perfil,
@@ -450,27 +450,27 @@ def agregar_al_carrito(request, producto_id):
             total_sin_iva=0,
             iva_compra=0,
             precio_final=0
-    )
-
+        )
 
     item, creado = ItemEnCarro.objects.get_or_create(
         carro=carro,
         producto=producto,
         defaults={
-            'cantidad_items': 1,
+            'cantidad_items': cantidad,
             'precio_unitario': producto.precio_unitario,
-            'total_sin_iva': producto.precio_unitario,
+            'total_sin_iva': cantidad * producto.precio_unitario,
             'fecha_uso': datetime.now()
         }
     )
 
     if not creado:
-        item.cantidad_items += 1
+        item.cantidad_items += cantidad
         item.total_sin_iva = item.cantidad_items * item.precio_unitario
         item.save()
 
-    messages.success(request, "🛒 Producto agregado al carrito.")
+    messages.success(request, f"🛒 Se agregaron {cantidad} unidades al carrito.")
     return redirect('ver_carrito')
+
 
 @login_required(login_url='login')
 def ver_carrito(request):
