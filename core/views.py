@@ -441,10 +441,17 @@ from datetime import datetime
 def agregar_al_carrito(request, producto_id):
     producto = get_object_or_404(Producto, id_producto=producto_id)
 
-    carro, creado = CarroCompras.objects.get_or_create(
-        usuario=request.user.perfil,
-        fecha_uso=datetime.now()
+    carro = CarroCompras.objects.filter(usuario=request.user.perfil).order_by('-fecha_uso').first()
+
+    if not carro:
+        carro = CarroCompras.objects.create(
+            usuario=request.user.perfil,
+            fecha_uso=datetime.now(),
+            total_sin_iva=0,
+            iva_compra=0,
+            precio_final=0
     )
+
 
     item, creado = ItemEnCarro.objects.get_or_create(
         carro=carro,
