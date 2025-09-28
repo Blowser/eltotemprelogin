@@ -2,7 +2,7 @@
 
 from django.urls import path
 from . import views
-from .views import ProductosView, AccesoriosView, crear_thread, ver_threads, crear_post, detalle_thread, ver_carrito
+from .views import ProductosView, AccesoriosView, crear_thread, ver_threads, crear_post, detalle_thread, ver_carrito, finalizar_compra
 from django.contrib.auth import views as auth_views
 
 
@@ -25,5 +25,6 @@ urlpatterns = [
     path('carrito/agregar/<int:producto_id>/', views.agregar_al_carrito, name='agregar_al_carrito'),
     path('carrito/', views.ver_carrito, name='ver_carrito'),
     path('carrito/eliminar/<int:item_id>/', views.eliminar_item_carrito, name='eliminar_item_carrito'),
+    path('carrito/finalizar/', views.finalizar_compra, name='finalizar_compra'),
     
 ]
