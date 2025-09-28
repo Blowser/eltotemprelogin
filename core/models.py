@@ -146,7 +146,8 @@ class Producto(models.Model):
         if not self.slug:
             self.slug = slugify(self.nombre)[:120]
         super().save(*args, **kwargs)
-        
+
+###MODELOS COMPRA:        
 class CarroCompras(models.Model):
     id_carro = models.AutoField(primary_key=True)
     total_sin_iva = models.IntegerField()
