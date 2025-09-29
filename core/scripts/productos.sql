@@ -1,5 +1,5 @@
-| INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (1, 'Protectores Standard | Colección Dragones - Dragón Veneno 66x91mm', 'accesorio', NULL, '<p>?En El Tótem tu mazo es más que cartas: es tu espíritu de juego. Por eso traemos estos Protectores para Cartas, hechos para dar seguridad y estilo en cada partida.</p><p>Con 100 fundas por paquete, tendrás la protección ideal para tu mazo favorito. Compatibles con Pokémon, Mitos y Leyendas, Yu-Gi-Oh! y cualquier TCG estándar.</p><p>? Características Totémicas:</p><ul>  <li>100 Protectores con diseño exclusivo.</li>  <li>Tamaño TCG Standard 66x91mm.</li>  <li>Acabado brillante con esquinas reforzadas.</li>  <li>Back Matte para un mejor agarre.</li>  <li>Ilustración: Dragón Veneno ? Peyeyo.</li></ul><p>? Mantén tu colección protegida bajo la guardia del Tótem.</p>');                                                                                                                                                             |
-| INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (2, 'Kit Racial Primer Bloque - Caballero', 'kit', NULL, '<p><strong>? Kit Racial ? Primer Bloque Caballero 2024</strong></p>
+ INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (1, 'Protectores Standard  Colección Dragones - Dragón Veneno 66x91mm', 'accesorio', NULL, '<p>?En El Tótem tu mazo es más que cartas: es tu espíritu de juego. Por eso traemos estos Protectores para Cartas, hechos para dar seguridad y estilo en cada partida.</p><p>Con 100 fundas por paquete, tendrás la protección ideal para tu mazo favorito. Compatibles con Pokémon, Mitos y Leyendas, Yu-Gi-Oh! y cualquier TCG estándar.</p><p>? Características Totémicas:</p><ul>  <li>100 Protectores con diseño exclusivo.</li>  <li>Tamaño TCG Standard 66x91mm.</li>  <li>Acabado brillante con esquinas reforzadas.</li>  <li>Back Matte para un mejor agarre.</li>  <li>Ilustración: Dragón Veneno ? Peyeyo.</li></ul><p>? Mantén tu colección protegida bajo la guardia del Tótem.</p>');                                                                                                                                                             
+ INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (2, 'Kit Racial Primer Bloque - Caballero', 'kit', NULL, '<p><strong>? Kit Racial ? Primer Bloque Caballero 2024</strong></p>
 
 <p>En el altar del Tótem se alza el poder ancestral de los <strong>Caballeros</strong>.
 Este Kit Racial no es solo un conjunto de cartas, es un legado de honor y luz que conecta lo antiguo con lo nuevo.</p>
@@ -10,7 +10,7 @@ Este Kit Racial no es solo un conjunto de cartas, es un legado de honor y luz qu
 - 8 sobres de <em>Leyendas del Primer Bloque 3.0</em></p>
 
 <p>? Bajo la mirada del Tótem, cada carta es un símbolo de linaje y estrategia.
-Invoca la fuerza caballeresca y expande tu colección con este kit único.</p>');                                                                                                                                                                                                                                                            |
+Invoca la fuerza caballeresca y expande tu colección con este kit único.</p>');                                                                                                                                                                                                                                                            
  INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (3, 'Mazo Primera Era - Vampiro', 'mazo', NULL, '<p>?  <strong>Mazo Primera Era - Vampiro</strong></p>
 
 <p>Desde las sombras del Tótem surge un susurro ancestral: el poder del <strong>Vampiro</strong> en todo su esplendor.
@@ -26,7 +26,7 @@ Diseñado para quienes abrazan la oscuridad con intención y sabiduría.</p>
   <li>Diseño pensado para la <em>Primera Era</em>, aportando frescura al linaje.</li>
 </ul>
 
-<p>? Libera la sed del Tótem, alza tus colmillos y deja que el crepúsculo guíe tu camino hacia la victoria.</p>'); |
+<p>? Libera la sed del Tótem, alza tus colmillos y deja que el crepúsculo guíe tu camino hacia la victoria.</p>'); 
  INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (4, 'Reinos Perdidos Aventuras Steampunk', 'kit', NULL, '<p>?? <strong>Reinos Perdidos ? Aventuras Steampunk</strong></p>
 
 <p>Desde las entrañas del Tótem se alza una nueva era mecánica: <strong>Aventuras Steampunk</strong>,
@@ -44,7 +44,7 @@ tecnología y misticismo. Cada carta de este kit es única, exclusiva y forjada 
 </ul>
 
 <p>? Eleva tu arsenal bajo el sello del Tótem.
-Deja que el silbido del vapor y el murmullo de los engranajes guíen tu ruta hacia la victoria.</p>'); |
+Deja que el silbido del vapor y el murmullo de los engranajes guíen tu ruta hacia la victoria.</p>'); 
  INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (5, 'Kit Extensión Troya - Honor Espartano', 'kit', NULL, '<p>?? <strong>Kit Extensión Troya ? Honor Espartano</strong></p>
 
 <p>Desde las arenas del Tótem emerge el estandarte espartano.
@@ -63,7 +63,7 @@ bajo la mirada firme del Tótem.</p>
 </ul>
 
 <p>? Honra al Tótem con la vehemencia de Esparta.
-Forja tu camino hacia la victoria con firmeza y coraje.</p>');                                        |
+Forja tu camino hacia la victoria con firmeza y coraje.</p>');                                        
  INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (6, 'Pack 5 Sobres Primera Era', 'sobre', NULL, '<p>? <strong>Pack 5 Sobres Mitos y Leyendas 3.0 ? Primera Era</strong></p>
 
 <p>Desde las raíces del Tótem surge la esencia de la <strong>Primera Era</strong>.
@@ -81,7 +81,7 @@ listos para ser parte de tu estrategia y colección.</p>
   <li>Ideal para expandir tu colección y fortalecer tus mazos con cartas de la era fundacional.</li>
 </ul>
 
-<p>? Invoca el poder ancestral del Tótem. Abre cada sobre y deja que las leyendas de la Primera Era guíen tu camino hacia la victoria.</p>'); |
+<p>? Invoca el poder ancestral del Tótem. Abre cada sobre y deja que las leyendas de la Primera Era guíen tu camino hacia la victoria.</p>'); 
  INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (7, 'Pokémon - Espada y Escudo: Origen Perdido Caja de Entrenador Élite', 'kit', NULL, '<p>? <strong>Caja de Entrenador Élite ? Espada y Escudo: Origen Perdido</strong></p>
 
 <p>Desde las profundidades del Tótem emerge una expansión que desafía las fronteras de la realidad:
@@ -106,7 +106,7 @@ y enfréntate a tus oponentes con dados y marcadores diseñados para la batalla.
   <li>1 caja de coleccionista con 4 divisores para mantener todo organizado.</li>
 </ul>
 
-<p>? Invoca el poder del Tótem, adéntrate en la Zona Perdida y forja tu destino en el universo Pokémon.</p>'); |
+<p>? Invoca el poder del Tótem, adéntrate en la Zona Perdida y forja tu destino en el universo Pokémon.</p>'); 
  INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (8, 'Pokémon Scarlet & Violet - Paradox Rift Booster', 'sobre', NULL, '<p>? <strong>Pokémon Scarlet & Violet ? Paradox Rift Booster</strong></p>
 
 <p>Desde el corazón del Tótem se abre una grieta entre mundos:
@@ -126,7 +126,7 @@ en parte de tu estrategia y colección.</p>
 </ul>
 
 <p>? Abre la Brecha Paradójica, invoca el poder del Tótem y deja que
-el flujo del tiempo guíe tu victoria.</p>'); |
+el flujo del tiempo guíe tu victoria.</p>'); 
  INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (9, 'Pokémon V Battle Deck Deoxys/Zeraora', 'mazo', NULL, '<p>? <strong>Pokémon V Battle Deck Deoxys/Zeraora</strong></p>
 
 <p>Desde las profundidades del Tótem emergen dos fuerzas cósmicas:
@@ -147,7 +147,7 @@ entrenadores novatos como para quienes buscan perfeccionar su estilo de juego.</
   <li>Guía de juego para facilitar el aprendizaje y la mejora continua.</li>
 </ul>
 
-<p>? Invoca el poder del Tótem, elige tu campeón y demuestra tu dominio en el campo de batalla.</p>'); |
+<p>? Invoca el poder del Tótem, elige tu campeón y demuestra tu dominio en el campo de batalla.</p>'); 
  INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (10, 'Pokémon - Fábula Sombría - Mini Lata', 'accesorio', NULL, '<p>? <strong>Pokémon Fábula Sombría Mini Lata</strong></p>
 
 <p>Desde las sombras del Tótem emerge una historia no contada:
@@ -167,7 +167,7 @@ tu equipo y una carta con la ilustración de la lata, que al coleccionarlas toda
 </ul>
 
 <p>? Abre esta mini lata, adéntrate en la oscuridad del Tótem y deja que las
-leyendas de <em>Fábula Sombría</em> guíen tu camino.</p>'); |
+leyendas de <em>Fábula Sombría</em> guíen tu camino.</p>'); 
  INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (11, 'Evoluciones Prismáticas - Lote de Paquetes de Mejoras', 'sobre', NULL, '<p>? <strong>Pokémon Escarlata y Púrpura: Evoluciones Prismáticas ? Lote de Paquetes de Mejora</strong></p>
 
 <p>Desde el corazón del Tótem, una nueva luz se despliega:
@@ -185,7 +185,7 @@ a través del Tótem, esperando ser descubierta por el entrenador digno.</p>
 </ul>
 
 <p>? Invoca el poder del Tótem y deja que las evoluciones prismáticas guíen
-tu camino hacia la victoria.</p>'); |
+tu camino hacia la victoria.</p>'); 
  INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (12, 'Escarlata y Púrpura: Fuerzas Temporales - Caja de entrenador de elite en Español', 'kit', NULL, '<p>? <strong>Pokémon Escarlata y Púrpura: Fuerzas Temporales ? Caja de Entrenador de Élite</strong></p>
 
 <p>Desde las profundidades del Tótem, el tiempo se pliega y se despliega,
@@ -214,7 +214,7 @@ diseñada para mantener tu equipo organizado y listo para la batalla.</p>
 </ul>
 
 <p>? Invoca el poder del Tótem y prepárate para enfrentar los desafíos
-que el tiempo ha traído consigo. ¡Que las Fuerzas Temporales guíen tu camino hacia la victoria!</p>'); |
+que el tiempo ha traído consigo. ¡Que las Fuerzas Temporales guíen tu camino hacia la victoria!</p>'); 
  INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (13, 'Tin of the Pharaoh?s Gods', 'kit', NULL, '<p>? <strong>Tin of the Pharaoh?s Gods ? Kit Coleccionable</strong></p>
 
 <p>Desde las arenas del Tótem surge una reliquia ancestral:
@@ -236,7 +236,7 @@ secret rare aguardan, listas para fortalecer tu mazo y tu colección.</p>
 </ul>
 
 <p>? Invoca el poder de los dioses del faraón, abre este kit y completa la reliquia
-que guardará tu legado como entrenador.</p>'); |
+que guardará tu legado como entrenador.</p>'); 
  INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (14, 'Yu-Gi-Oh! Kuriboh Kollection Game Mat', 'accesorio', NULL, '<p>? <strong>Yu-Gi-Oh! Kuriboh Kollection Game Mat ? El Tapiz del Tótem</strong></p>
 
 <p>Desde las profundidades del Tótem, donde los Kuriboh protegen el flujo de la energía, llega este tapiz oficial que celebra la esencia de la familia Kuriboh. Con la imagen de <strong>Magikuriboh</strong>, la nueva incorporación de la familia, este tapiz es más que una simple superficie de juego; es un portal hacia el reino de los duelos.</p>
@@ -252,7 +252,7 @@ que guardará tu legado como entrenador.</p>'); |
   <li>Producto oficial de Konami, utilizado en eventos sancionados por la compañía.</li>
 </ul>
 
-<p>? Invoca el poder de los Kuriboh y deja que su energía te guíe hacia la victoria en cada duelo.</p>'); |
+<p>? Invoca el poder de los Kuriboh y deja que su energía te guíe hacia la victoria en cada duelo.</p>'); 
  INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (15, 'Structure Deck: The Crimson King', 'mazo', NULL, '<p>? <strong>Structure Deck: The Crimson King ? El Reino del Dragón Carmesí</strong></p>
 
 <p>Desde las profundidades del Tótem, donde el viento del fénix se encuentra con el rugido del dragón, emerge el <strong>Structure Deck: The Crimson King</strong>. Esta baraja te coloca en el asiento del conductor del torbellino fénix, otorgándote el control de las múltiples facetas del temible <em>Red Dragon Archfiend</em>.</p>
@@ -269,7 +269,7 @@ que guardará tu legado como entrenador.</p>'); |
   <li>Ideal para principiantes y duelistas que desean fortalecer su mazo con cartas temáticas de "Red Dragon Archfiend".</li>
 </ul>
 
-<p>? Invoca el poder del dragón carmesí y deja que su fuego purificador guíe tu camino hacia la victoria.</p>'); |
+<p>? Invoca el poder del dragón carmesí y deja que su fuego purificador guíe tu camino hacia la victoria.</p>'); 
  INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (16, 'Valiant Smashers - Booster Pack', 'sobre', NULL, '<p>? <strong>Yu-Gi-Oh! Valiant Smashers ? Paquete de Mejora</strong></p>
 
 <p>Desde las profundidades del Tótem, donde el pasado y el futuro se entrelazan, emerge el <strong>Valiant Smashers Booster Pack</strong>. Este paquete no es solo una colección de cartas; es una puerta a tres nuevas estrategias que desafían las convenciones del duelo.</p>
@@ -288,7 +288,7 @@ que guardará tu legado como entrenador.</p>'); |
   <li>Diseñado para jugadores que buscan estrategias innovadoras y poderosas.</li>
 </ul>
 
-<p>? Invoca el poder de las nuevas estrategias y lleva tu mazo a nuevas alturas con el Valiant Smashers Booster Pack.</p>'); |
+<p>? Invoca el poder de las nuevas estrategias y lleva tu mazo a nuevas alturas con el Valiant Smashers Booster Pack.</p>'); 
  INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (17, 'Maximum Gold: El Dorado ? Sobres Legendarios', 'sobre', NULL, '<p>? <strong>Maximum Gold: El Dorado ? Sobres Legendarios</strong></p>
 
 <p>Desde el corazón del Tótem, donde la luz dorada se encuentra con la fuerza ancestral, surge
@@ -308,7 +308,7 @@ colección se convierte en leyenda.</p>
   <li>Acabado Premium Gold que realza la belleza y resistencia de tus cartas.</li>
 </ul>
 
-<p>? Invoca la luz del Tótem dorado y deja que El Dorado transforme tu camino hacia la victoria.</p>'); |
+<p>? Invoca la luz del Tótem dorado y deja que El Dorado transforme tu camino hacia la victoria.</p>'); 
  INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (18, 'Yu-Gi-Oh! 2025 Mega Pack Tin Español', 'kit', NULL, '<p>? <strong>Yu-Gi-Oh! 2025 Mega Pack Tin Español</strong></p>
 
 <p>Desde lo profundo del espíritu del Tótem, donde las runas antiguas susurran secretos, surge
@@ -327,5 +327,5 @@ Cada apertura es una ceremonia, un paso más hacia el dominio absoluto en el cam
   <li>Diseño único para coleccionistas y duelistas.</li>
 </ul>
 
-<p>? Invoca la fuerza ancestral, abre el cofre y deja que el espíritu del Tótem guíe tu destino en cada duelo.</p>'); |
+<p>? Invoca la fuerza ancestral, abre el cofre y deja que el espíritu del Tótem guíe tu destino en cada duelo.</p>'); 
 
