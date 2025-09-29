@@ -11,7 +11,7 @@ Este Kit Racial no es solo un conjunto de cartas, es un legado de honor y luz qu
 
 <p>? Bajo la mirada del Tótem, cada carta es un símbolo de linaje y estrategia.
 Invoca la fuerza caballeresca y expande tu colección con este kit único.</p>');                                                                                                                                                                                                                                                            |
-| INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (3, 'Mazo Primera Era - Vampiro', 'mazo', NULL, '<p>?  <strong>Mazo Primera Era - Vampiro</strong></p>
+ INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (3, 'Mazo Primera Era - Vampiro', 'mazo', NULL, '<p>?  <strong>Mazo Primera Era - Vampiro</strong></p>
 
 <p>Desde las sombras del Tótem surge un susurro ancestral: el poder del <strong>Vampiro</strong> en todo su esplendor.
 Este mazo no es solo cartas... es un pacto de sangre, estrategia y misterio que reclama su lugar en tu colección.</p>
@@ -27,7 +27,7 @@ Diseñado para quienes abrazan la oscuridad con intención y sabiduría.</p>
 </ul>
 
 <p>? Libera la sed del Tótem, alza tus colmillos y deja que el crepúsculo guíe tu camino hacia la victoria.</p>'); |
-| INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (4, 'Reinos Perdidos Aventuras Steampunk', 'kit', NULL, '<p>?? <strong>Reinos Perdidos ? Aventuras Steampunk</strong></p>
+ INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (4, 'Reinos Perdidos Aventuras Steampunk', 'kit', NULL, '<p>?? <strong>Reinos Perdidos ? Aventuras Steampunk</strong></p>
 
 <p>Desde las entrañas del Tótem se alza una nueva era mecánica: <strong>Aventuras Steampunk</strong>,
 donde engranajes y vapor se combinan con lo ancestral. Este kit no es solo cartas:
@@ -45,7 +45,7 @@ tecnología y misticismo. Cada carta de este kit es única, exclusiva y forjada 
 
 <p>? Eleva tu arsenal bajo el sello del Tótem.
 Deja que el silbido del vapor y el murmullo de los engranajes guíen tu ruta hacia la victoria.</p>'); |
-| INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (5, 'Kit Extensión Troya - Honor Espartano', 'kit', NULL, '<p>?? <strong>Kit Extensión Troya ? Honor Espartano</strong></p>
+ INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (5, 'Kit Extensión Troya - Honor Espartano', 'kit', NULL, '<p>?? <strong>Kit Extensión Troya ? Honor Espartano</strong></p>
 
 <p>Desde las arenas del Tótem emerge el estandarte espartano.
 Este kit no es solo cartas: es un juramento de gloria y disciplina,
@@ -64,7 +64,7 @@ bajo la mirada firme del Tótem.</p>
 
 <p>? Honra al Tótem con la vehemencia de Esparta.
 Forja tu camino hacia la victoria con firmeza y coraje.</p>');                                        |
-| INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (6, 'Pack 5 Sobres Primera Era', 'sobre', NULL, '<p>? <strong>Pack 5 Sobres Mitos y Leyendas 3.0 ? Primera Era</strong></p>
+ INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (6, 'Pack 5 Sobres Primera Era', 'sobre', NULL, '<p>? <strong>Pack 5 Sobres Mitos y Leyendas 3.0 ? Primera Era</strong></p>
 
 <p>Desde las raíces del Tótem surge la esencia de la <strong>Primera Era</strong>.
 Este pack no es solo una colección de sobres; es una invocación a los orígenes,
@@ -82,7 +82,7 @@ listos para ser parte de tu estrategia y colección.</p>
 </ul>
 
 <p>? Invoca el poder ancestral del Tótem. Abre cada sobre y deja que las leyendas de la Primera Era guíen tu camino hacia la victoria.</p>'); |
-| INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (7, 'Pokémon - Espada y Escudo: Origen Perdido Caja de Entrenador Élite', 'kit', NULL, '<p>? <strong>Caja de Entrenador Élite ? Espada y Escudo: Origen Perdido</strong></p>
+ INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (7, 'Pokémon - Espada y Escudo: Origen Perdido Caja de Entrenador Élite', 'kit', NULL, '<p>? <strong>Caja de Entrenador Élite ? Espada y Escudo: Origen Perdido</strong></p>
 
 <p>Desde las profundidades del Tótem emerge una expansión que desafía las fronteras de la realidad:
 <strong>Origen Perdido</strong>. Esta Caja de Entrenador Élite no es solo un conjunto de cartas;
@@ -107,7 +107,7 @@ y enfréntate a tus oponentes con dados y marcadores diseñados para la batalla.
 </ul>
 
 <p>? Invoca el poder del Tótem, adéntrate en la Zona Perdida y forja tu destino en el universo Pokémon.</p>'); |
-| INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (8, 'Pokémon Scarlet & Violet - Paradox Rift Booster', 'sobre', NULL, '<p>? <strong>Pokémon Scarlet & Violet ? Paradox Rift Booster</strong></p>
+ INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (8, 'Pokémon Scarlet & Violet - Paradox Rift Booster', 'sobre', NULL, '<p>? <strong>Pokémon Scarlet & Violet ? Paradox Rift Booster</strong></p>
 
 <p>Desde el corazón del Tótem se abre una grieta entre mundos:
 <strong>Brecha Paradójica</strong>. Este sobre no es solo cartas,
@@ -127,7 +127,7 @@ en parte de tu estrategia y colección.</p>
 
 <p>? Abre la Brecha Paradójica, invoca el poder del Tótem y deja que
 el flujo del tiempo guíe tu victoria.</p>'); |
-| INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (9, 'Pokémon V Battle Deck Deoxys/Zeraora', 'mazo', NULL, '<p>? <strong>Pokémon V Battle Deck Deoxys/Zeraora</strong></p>
+ INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (9, 'Pokémon V Battle Deck Deoxys/Zeraora', 'mazo', NULL, '<p>? <strong>Pokémon V Battle Deck Deoxys/Zeraora</strong></p>
 
 <p>Desde las profundidades del Tótem emergen dos fuerzas cósmicas:
 <strong>Deoxys</strong>, el Pokémon de ADN, y <strong>Zeraora</strong>,
@@ -148,7 +148,7 @@ entrenadores novatos como para quienes buscan perfeccionar su estilo de juego.</
 </ul>
 
 <p>? Invoca el poder del Tótem, elige tu campeón y demuestra tu dominio en el campo de batalla.</p>'); |
-| INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (10, 'Pokémon - Fábula Sombría - Mini Lata', 'accesorio', NULL, '<p>? <strong>Pokémon Fábula Sombría Mini Lata</strong></p>
+ INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (10, 'Pokémon - Fábula Sombría - Mini Lata', 'accesorio', NULL, '<p>? <strong>Pokémon Fábula Sombría Mini Lata</strong></p>
 
 <p>Desde las sombras del Tótem emerge una historia no contada:
 <strong>Fábula Sombría</strong>. Esta mini lata es más que un simple contenedor;
@@ -168,7 +168,7 @@ tu equipo y una carta con la ilustración de la lata, que al coleccionarlas toda
 
 <p>? Abre esta mini lata, adéntrate en la oscuridad del Tótem y deja que las
 leyendas de <em>Fábula Sombría</em> guíen tu camino.</p>'); |
-| INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (11, 'Evoluciones Prismáticas - Lote de Paquetes de Mejoras', 'sobre', NULL, '<p>? <strong>Pokémon Escarlata y Púrpura: Evoluciones Prismáticas ? Lote de Paquetes de Mejora</strong></p>
+ INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (11, 'Evoluciones Prismáticas - Lote de Paquetes de Mejoras', 'sobre', NULL, '<p>? <strong>Pokémon Escarlata y Púrpura: Evoluciones Prismáticas ? Lote de Paquetes de Mejora</strong></p>
 
 <p>Desde el corazón del Tótem, una nueva luz se despliega:
 <strong>Evoluciones Prismáticas</strong>. Este lote de seis paquetes de mejora
@@ -186,7 +186,7 @@ a través del Tótem, esperando ser descubierta por el entrenador digno.</p>
 
 <p>? Invoca el poder del Tótem y deja que las evoluciones prismáticas guíen
 tu camino hacia la victoria.</p>'); |
-| INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (12, 'Escarlata y Púrpura: Fuerzas Temporales - Caja de entrenador de elite en Español', 'kit', NULL, '<p>? <strong>Pokémon Escarlata y Púrpura: Fuerzas Temporales ? Caja de Entrenador de Élite</strong></p>
+ INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (12, 'Escarlata y Púrpura: Fuerzas Temporales - Caja de entrenador de elite en Español', 'kit', NULL, '<p>? <strong>Pokémon Escarlata y Púrpura: Fuerzas Temporales ? Caja de Entrenador de Élite</strong></p>
 
 <p>Desde las profundidades del Tótem, el tiempo se pliega y se despliega,
 trayendo consigo las fuerzas del pasado y del futuro. Esta Caja de Entrenador
@@ -215,7 +215,7 @@ diseñada para mantener tu equipo organizado y listo para la batalla.</p>
 
 <p>? Invoca el poder del Tótem y prepárate para enfrentar los desafíos
 que el tiempo ha traído consigo. ¡Que las Fuerzas Temporales guíen tu camino hacia la victoria!</p>'); |
-| INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (13, 'Tin of the Pharaoh?s Gods', 'kit', NULL, '<p>? <strong>Tin of the Pharaoh?s Gods ? Kit Coleccionable</strong></p>
+ INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (13, 'Tin of the Pharaoh?s Gods', 'kit', NULL, '<p>? <strong>Tin of the Pharaoh?s Gods ? Kit Coleccionable</strong></p>
 
 <p>Desde las arenas del Tótem surge una reliquia ancestral:
 <strong>Tin of the Pharaoh?s Gods</strong>. Esta lata no es solo un contenedor;
@@ -237,7 +237,7 @@ secret rare aguardan, listas para fortalecer tu mazo y tu colección.</p>
 
 <p>? Invoca el poder de los dioses del faraón, abre este kit y completa la reliquia
 que guardará tu legado como entrenador.</p>'); |
-| INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (14, 'Yu-Gi-Oh! Kuriboh Kollection Game Mat', 'accesorio', NULL, '<p>? <strong>Yu-Gi-Oh! Kuriboh Kollection Game Mat ? El Tapiz del Tótem</strong></p>
+ INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (14, 'Yu-Gi-Oh! Kuriboh Kollection Game Mat', 'accesorio', NULL, '<p>? <strong>Yu-Gi-Oh! Kuriboh Kollection Game Mat ? El Tapiz del Tótem</strong></p>
 
 <p>Desde las profundidades del Tótem, donde los Kuriboh protegen el flujo de la energía, llega este tapiz oficial que celebra la esencia de la familia Kuriboh. Con la imagen de <strong>Magikuriboh</strong>, la nueva incorporación de la familia, este tapiz es más que una simple superficie de juego; es un portal hacia el reino de los duelos.</p>
 
@@ -253,7 +253,7 @@ que guardará tu legado como entrenador.</p>'); |
 </ul>
 
 <p>? Invoca el poder de los Kuriboh y deja que su energía te guíe hacia la victoria en cada duelo.</p>'); |
-| INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (15, 'Structure Deck: The Crimson King', 'mazo', NULL, '<p>? <strong>Structure Deck: The Crimson King ? El Reino del Dragón Carmesí</strong></p>
+ INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (15, 'Structure Deck: The Crimson King', 'mazo', NULL, '<p>? <strong>Structure Deck: The Crimson King ? El Reino del Dragón Carmesí</strong></p>
 
 <p>Desde las profundidades del Tótem, donde el viento del fénix se encuentra con el rugido del dragón, emerge el <strong>Structure Deck: The Crimson King</strong>. Esta baraja te coloca en el asiento del conductor del torbellino fénix, otorgándote el control de las múltiples facetas del temible <em>Red Dragon Archfiend</em>.</p>
 
@@ -270,7 +270,7 @@ que guardará tu legado como entrenador.</p>'); |
 </ul>
 
 <p>? Invoca el poder del dragón carmesí y deja que su fuego purificador guíe tu camino hacia la victoria.</p>'); |
-| INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (16, 'Valiant Smashers - Booster Pack', 'sobre', NULL, '<p>? <strong>Yu-Gi-Oh! Valiant Smashers ? Paquete de Mejora</strong></p>
+ INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (16, 'Valiant Smashers - Booster Pack', 'sobre', NULL, '<p>? <strong>Yu-Gi-Oh! Valiant Smashers ? Paquete de Mejora</strong></p>
 
 <p>Desde las profundidades del Tótem, donde el pasado y el futuro se entrelazan, emerge el <strong>Valiant Smashers Booster Pack</strong>. Este paquete no es solo una colección de cartas; es una puerta a tres nuevas estrategias que desafían las convenciones del duelo.</p>
 
@@ -289,7 +289,7 @@ que guardará tu legado como entrenador.</p>'); |
 </ul>
 
 <p>? Invoca el poder de las nuevas estrategias y lleva tu mazo a nuevas alturas con el Valiant Smashers Booster Pack.</p>'); |
-| INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (17, 'Maximum Gold: El Dorado ? Sobres Legendarios', 'sobre', NULL, '<p>? <strong>Maximum Gold: El Dorado ? Sobres Legendarios</strong></p>
+ INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (17, 'Maximum Gold: El Dorado ? Sobres Legendarios', 'sobre', NULL, '<p>? <strong>Maximum Gold: El Dorado ? Sobres Legendarios</strong></p>
 
 <p>Desde el corazón del Tótem, donde la luz dorada se encuentra con la fuerza ancestral, surge
 <strong>Maximum Gold: El Dorado</strong>. Esta expansión no es solo una colección de cartas,
@@ -309,7 +309,7 @@ colección se convierte en leyenda.</p>
 </ul>
 
 <p>? Invoca la luz del Tótem dorado y deja que El Dorado transforme tu camino hacia la victoria.</p>'); |
-| INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (18, 'Yu-Gi-Oh! 2025 Mega Pack Tin Español', 'kit', NULL, '<p>? <strong>Yu-Gi-Oh! 2025 Mega Pack Tin Español</strong></p>
+ INSERT INTO core_producto (id_producto, nombre, tipo_producto, tipo_accesorio, descripcion) VALUES (18, 'Yu-Gi-Oh! 2025 Mega Pack Tin Español', 'kit', NULL, '<p>? <strong>Yu-Gi-Oh! 2025 Mega Pack Tin Español</strong></p>
 
 <p>Desde lo profundo del espíritu del Tótem, donde las runas antiguas susurran secretos, surge
 la <strong>Yu-Gi-Oh! 2025 Mega Pack Tin</strong>. No es solo una lata: es un relicario sagrado
