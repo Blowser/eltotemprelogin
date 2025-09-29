@@ -187,7 +187,7 @@ class ItemEnCarro(models.Model):
 class Direccion(models.Model):
     id_direccion = models.AutoField(primary_key=True)
     direccion = models.CharField(max_length=50, help_text="Calle y numeración")
-    numero_dpto_casa = models.CharField(max_length=10, help_text="Número de departamento o casa")  # ← sin null ni blank
+    numero_dpto_casa = models.CharField(max_length=10, help_text="Número de departamento o casa")
     comuna = models.CharField(max_length=30)
     region = models.CharField(max_length=30)
     codigo_postal = models.IntegerField(null=True, blank=True)
