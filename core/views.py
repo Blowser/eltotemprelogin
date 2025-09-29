@@ -70,6 +70,7 @@ def registrarse_view(request):
             password1 = request.POST['password1']
             password2 = request.POST['password2']
             direccion_text = request.POST['direccion'].strip()
+            numero_dpto_casa = request.POST['numero_dpto_casa'].strip()
             comuna = request.POST['comuna'].strip()
             region = request.POST['region'].strip()
 
@@ -91,6 +92,7 @@ def registrarse_view(request):
 
             Direccion.objects.create(
                 direccion=direccion_text,
+                numero_dpto_casa=numero_dpto_casa,
                 comuna=comuna,
                 region=region,
                 usuario=usuario
