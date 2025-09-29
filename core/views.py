@@ -535,4 +535,4 @@ def finalizar_compra(request):
     )
 
     messages.success(request, "🎉 Pedido registrado. El ritual está completo.")
-    return redirect('panel_usuario')  # O donde quieras mostrar el resumen
+    return redirect('ver_carrito')  # O donde quieras mostrar el resumen
