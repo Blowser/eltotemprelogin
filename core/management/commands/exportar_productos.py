@@ -1,5 +1,7 @@
 from django.core.management.base import BaseCommand
 from core.models import Producto
+import html
+
 
 class Command(BaseCommand):
     help = "Exporta productos como comandos SQL INSERT"
@@ -31,7 +33,15 @@ class Command(BaseCommand):
                 f.write(insert)
 
 def quote(val):
-    return f'"{val.replace("\"", "\'").replace("\n", " ").strip()}"'
+    if val is None:
+        return 'NULL'
+    val = str(val)
+    val = val.encode('utf-8').decode('unicode_escape')  # desescapa unicode
+    val = html.escape(val)  # escapa comillas y símbolos HTML
+    val = val.replace('"', "'")  # reemplaza comillas dobles por simples
+    val = val.replace('\n', ' ').replace('\r', '')  # limpia saltos
+    return f'"{val}"'
+
 
 def quote_or_null(val):
     return quote(val) if val else 'NULL'
