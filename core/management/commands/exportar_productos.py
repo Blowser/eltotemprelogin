@@ -32,15 +32,15 @@ class Command(BaseCommand):
 );\n"""
                 f.write(insert)
 
+import json
+
 def quote(val):
     if val is None:
         return 'NULL'
     val = str(val)
-    val = val.replace('"', '\\"')  # escapa comillas dobles
-    val = val.replace('\n', ' ').replace('\r', '')  # limpia saltos
-    val = val.encode('utf-8', 'ignore').decode('utf-8')  # limpia caracteres rotos
-    val = val.replace('\\', '\\\\')  # escapa backslashes
-    return f'"{val.strip()}"'
+    val = json.dumps(val, ensure_ascii=False)  # serializa como JSON, escapa comillas, emojis, saltos
+    return val  # ya incluye comillas dobles
+
 
 
 
