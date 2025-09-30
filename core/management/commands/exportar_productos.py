@@ -38,8 +38,12 @@ def quote(val):
     if val is None:
         return 'NULL'
     val = str(val)
-    val = json.dumps(val, ensure_ascii=False)  # serializa como JSON, escapa comillas, emojis, saltos
-    return val  # ya incluye comillas dobles
+    val = val.replace('\\', '\\\\')  # escapa backslashes
+    val = val.replace('"', '\\"')    # escapa comillas dobles
+    val = val.replace('\r', '')      # elimina \r
+    val = val.replace('\n', ' ')     # convierte \n en espacio
+    return f'"{val.strip()}"'
+
 
 
 
