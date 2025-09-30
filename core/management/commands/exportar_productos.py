@@ -36,10 +36,11 @@ def quote(val):
     if val is None:
         return 'NULL'
     val = str(val)
-    val = val.replace('"', "'")  # reemplaza comillas dobles por simples
-    val = val.replace('\n', ' ').replace('\r', '')  # limpia saltos
+    val = val.replace('"', "'")  # comillas dobles → simples
+    val = val.replace('\n', ' ').replace('\r', '')  # saltos → espacios
     val = val.encode('utf-8', 'ignore').decode('utf-8')  # limpia caracteres rotos
-    return f'"{val}"'
+    val = val.replace('\\', '\\\\')  # escapa backslashes
+    return f'"{val.strip()}"'
 
 
 
