@@ -10,7 +10,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('registrarse/', views.registrarse_view, name='registrarse'),
     path('login/', views.login_view, name='login'),
-    path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
+    path('logout/', views.logout_view, name='logout'),
     path('perfil/', views.ver_perfil, name='ver_perfil'),
     path('quienes-somos/', views.quienes_somos_view, name='quienes_somos'),
     path('noticias/', views.NoticiasFiltradasView.as_view(), name='noticias'),
