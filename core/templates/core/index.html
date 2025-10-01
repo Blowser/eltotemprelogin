@@ -9,7 +9,15 @@
     {% for producto in productos_nuevos %}
       <div class="col-12 col-sm-6 col-md-3 mb-4">
         <div class="card h-100 text-center">
-          <img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.nombre }}">
+          {% if producto.imagen %}
+            <img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.nombre }}">
+          {% else %}
+            {% with 'core/img/productos/'|add:producto.slug|add:'.webp' as ruta_img %}
+              <img src="{% static ruta_img %}" class="card-img-top" alt="{{ producto.nombre }}"
+                  onerror="this.onerror=null;this.src='{% static 'core/img/placeholder.png' %}';">
+            {% endwith %}
+          {% endif %}
+
           <div class="card-body">
             <p class="card-text">{{ producto.nombre }}</p>
           </div>
@@ -27,7 +35,12 @@
     {% for publicacion in publicaciones_populares %}
       <div class="col-12 col-sm-6 col-md-3 mb-4">
         <div class="card h-100 text-center">
-          <img src="{% static 'core/img/carta1.webp' %}" class="card-img-top" alt="Publicación">
+          {% if thread.imagen %}
+            <img src="{{ thread.imagen.url }}" class="card-img-top" alt="{{ thread.titulo }}">
+          {% else %}
+            <img src="{% static 'core/img/placeholder.png' %}" class="card-img-top" alt="Sin imagen">
+          {% endif %}
+
           <div class="card-body">
             <p class="card-text">“{{ publicacion.titulo }}”</p>
           </div>
@@ -45,7 +58,12 @@
     {% for noticia in noticias_recientes %}
       <div class="col-12 col-sm-6 col-md-3 mb-4">
         <div class="card h-100 text-center">
-          <img src="{{ noticia.imagen.url }}" class="card-img-top" alt="{{ noticia.titulo }}">
+          {% if noticia.imagen %}
+            <img src="{{ noticia.imagen }}" class="card-img-top" alt="{{ noticia.titulo }}">
+          {% else %}
+            <img src="{% static 'core/img/placeholder.png' %}" class="card-img-top" alt="Sin imagen">
+          {% endif %}
+
           <div class="card-body">
             <p class="card-text">{{ noticia.titulo }}</p>
           </div>
