@@ -32,23 +32,24 @@
 <section class="publicaciones-usuarios container mt-5">
   <h2>🗣️ TEMAS MÁS COMENTADOS</h2>
   <div class="row">
-    {% for publicacion in publicaciones_populares %}
+    {% for thread in publicaciones_populares %}
       <div class="col-12 col-sm-6 col-md-3 mb-4">
         <div class="card h-100 text-center">
           {% if thread.imagen %}
             <img src="{{ thread.imagen.url }}" class="card-img-top" alt="{{ thread.titulo }}">
           {% else %}
-            <img src="{% static 'core/img/placeholder.png' %}" class="card-img-top" alt="Sin imagen">
+            {% with 'core/img/hilos/'|add:thread.titulo|add:'.webp' as ruta_img %}
+              <img src="{% static ruta_img %}" class="card-img-top" alt="{{ thread.titulo }}"
+                  onerror="this.onerror=null;this.src='{% static 'core/img/placeholder.png' %}';">
+            {% endwith %}
           {% endif %}
-
           <div class="card-body">
-            <p class="card-text">“{{ publicacion.titulo }}”</p>
+            <p class="card-text">“{{ thread.titulo }}”</p>
           </div>
         </div>
       </div>
-    {% empty %}
-      <p class="text-muted">No hay publicaciones destacadas aún.</p>
     {% endfor %}
+
   </div>
 </section>
 
