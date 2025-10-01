@@ -41,12 +41,13 @@ from core.models import Producto, Thread, NoticiaTCG
 from django.db.models import Count
 
 
+from django.shortcuts import render
+from core.models import Producto, Thread, ForoPost, NoticiaTCG
+from django.db.models import Count
+
 def index_view(request):
     productos_nuevos = Producto.objects.order_by('-id_producto')[:4]
-    from django.db.models import Count
-
-publicaciones_populares = Thread.objects.annotate(num_comentarios=Count('foropost')).order_by('-num_comentarios')[:4]
-
+    publicaciones_populares = Thread.objects.annotate(num_comentarios=Count('foropost')).order_by('-num_comentarios')[:4]
     noticias_recientes = NoticiaTCG.objects.order_by('-fecha')[:4]
 
     return render(request, 'core/index.html', {
@@ -54,6 +55,7 @@ publicaciones_populares = Thread.objects.annotate(num_comentarios=Count('foropos
         'publicaciones_populares': publicaciones_populares,
         'noticias_recientes': noticias_recientes,
     })
+
 
 
 # Se define el index para que sea la página principal, este será nuestra página de inicio de la pagina web aquí, en views.py
