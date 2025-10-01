@@ -129,8 +129,17 @@ def login_view(request):
             return redirect('login')  # 🔥 redirige para que el mensaje se muestre
 
     return render(request, 'core/login.html')
+# =====================
+# LOGOUT
+# =====================
+from django.contrib.auth import logout
+from django.contrib import messages
+from django.shortcuts import redirect
 
-
+def logout_view(request):
+    logout(request)
+    list(messages.get_messages(request))  # Consume los mensajes
+    return redirect('login')
 # =====================
 # VER PERFIL
 # =====================
