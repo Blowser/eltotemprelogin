@@ -43,8 +43,11 @@ from django.db.models import Count
 
 def index_view(request):
     productos_nuevos = Producto.objects.order_by('-id_producto')[:4]
-    publicaciones_populares = Thread.objects.annotate(num_comentarios=Count('comentarios')).order_by('-num_comentarios')[:4]
-    noticias_recientes = NoticiaTCG.objects.order_by('-fecha_publicacion')[:4]
+    from django.db.models import Count
+
+publicaciones_populares = Thread.objects.annotate(num_comentarios=Count('foropost')).order_by('-num_comentarios')[:4]
+
+    noticias_recientes = NoticiaTCG.objects.order_by('-fecha')[:4]
 
     return render(request, 'core/index.html', {
         'productos_nuevos': productos_nuevos,
