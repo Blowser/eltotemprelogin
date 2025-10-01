@@ -8,20 +8,21 @@
   <div class="row">
     {% for producto in productos_nuevos %}
       <div class="col-12 col-sm-6 col-md-3 mb-4">
-        <div class="card h-100 text-center">
-          {% if producto.imagen %}
-            <img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.nombre }}">
-          {% else %}
-            {% with 'core/img/productos/'|add:producto.slug|add:'.webp' as ruta_img %}
-              <img src="{% static ruta_img %}" class="card-img-top" alt="{{ producto.nombre }}"
-                  onerror="this.onerror=null;this.src='{% static 'core/img/placeholder.png' %}';">
-            {% endwith %}
-          {% endif %}
-
-          <div class="card-body">
-            <p class="card-text">{{ producto.nombre }}</p>
+        <a href="{% url 'detalle_producto' id=producto.id_producto %}" class="text-decoration-none text-dark">
+          <div class="card h-100 text-center">
+            {% if producto.imagen %}
+              <img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.nombre }}">
+            {% else %}
+              {% with 'core/img/productos/'|add:producto.slug|add:'.webp' as ruta_img %}
+                <img src="{% static ruta_img %}" class="card-img-top" alt="{{ producto.nombre }}"
+                    onerror="this.onerror=null;this.src='{% static 'core/img/placeholder.png' %}';">
+              {% endwith %}
+            {% endif %}
+            <div class="card-body">
+              <p class="card-text">{{ producto.nombre }}</p>
+            </div>
           </div>
-        </div>
+        </a>
       </div>
     {% empty %}
       <p class="text-muted">No hay productos nuevos por ahora.</p>
@@ -34,22 +35,23 @@
   <div class="row">
     {% for thread in publicaciones_populares %}
       <div class="col-12 col-sm-6 col-md-3 mb-4">
-        <div class="card h-100 text-center">
-          {% if thread.imagen %}
-            <img src="{{ thread.imagen.url }}" class="card-img-top" alt="{{ thread.titulo }}">
-          {% else %}
-            {% with 'core/img/hilos/'|add:thread.titulo|add:'.webp' as ruta_img %}
-              <img src="{% static ruta_img %}" class="card-img-top" alt="{{ thread.titulo }}"
-                  onerror="this.onerror=null;this.src='{% static 'core/img/placeholder.png' %}';">
-            {% endwith %}
-          {% endif %}
-          <div class="card-body">
-            <p class="card-text">“{{ thread.titulo }}”</p>
+        <a href="{% url 'detalle_thread' thread_id=thread.id_thread %}" class="text-decoration-none text-dark">
+          <div class="card h-100 text-center">
+            {% if thread.imagen %}
+              <img src="{{ thread.imagen.url }}" class="card-img-top" alt="{{ thread.titulo }}">
+            {% else %}
+              {% with 'core/img/hilos/'|add:thread.titulo|add:'.webp' as ruta_img %}
+                <img src="{% static ruta_img %}" class="card-img-top" alt="{{ thread.titulo }}"
+                    onerror="this.onerror=null;this.src='{% static 'core/img/placeholder.png' %}';">
+              {% endwith %}
+            {% endif %}
+            <div class="card-body">
+              <p class="card-text">“{{ thread.titulo }}”</p>
+            </div>
           </div>
-        </div>
+        </a>
       </div>
     {% endfor %}
-
   </div>
 </section>
 
@@ -58,17 +60,18 @@
   <div class="row">
     {% for noticia in noticias_recientes %}
       <div class="col-12 col-sm-6 col-md-3 mb-4">
-        <div class="card h-100 text-center">
-          {% if noticia.imagen %}
-            <img src="{{ noticia.imagen }}" class="card-img-top" alt="{{ noticia.titulo }}">
-          {% else %}
-            <img src="{% static 'core/img/placeholder.png' %}" class="card-img-top" alt="Sin imagen">
-          {% endif %}
-
-          <div class="card-body">
-            <p class="card-text">{{ noticia.titulo }}</p>
+        <a href="{{ noticia.fuente }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none text-dark">
+          <div class="card h-100 text-center">
+            {% if noticia.imagen %}
+              <img src="{{ noticia.imagen }}" class="card-img-top" alt="{{ noticia.titulo }}">
+            {% else %}
+              <img src="{% static 'core/img/placeholder.png' %}" class="card-img-top" alt="Sin imagen">
+            {% endif %}
+            <div class="card-body">
+              <p class="card-text">{{ noticia.titulo }}</p>
+            </div>
           </div>
-        </div>
+        </a>
       </div>
     {% empty %}
       <p class="text-muted">No hay noticias recientes por ahora.</p>
