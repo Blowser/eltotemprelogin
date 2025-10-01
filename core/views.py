@@ -37,19 +37,21 @@ from django.http import HttpResponse
 
 # CREACIÓN DE VISTAS
 from django.shortcuts import render
-from core.models import Producto, Publicacion, Noticia
+from core.models import Producto, Thread, NoticiaTCG
 from django.db.models import Count
+
 
 def index_view(request):
     productos_nuevos = Producto.objects.order_by('-fecha_creacion')[:4]
-    publicaciones_populares = Publicacion.objects.annotate(num_comentarios=Count('comentarios')).order_by('-num_comentarios')[:4]
-    noticias_recientes = Noticia.objects.order_by('-fecha_publicacion')[:4]
+    publicaciones_populares = Thread.objects.annotate(num_comentarios=Count('comentarios')).order_by('-num_comentarios')[:4]
+    noticias_recientes = NoticiaTCG.objects.order_by('-fecha_publicacion')[:4]
 
     return render(request, 'core/index.html', {
         'productos_nuevos': productos_nuevos,
         'publicaciones_populares': publicaciones_populares,
         'noticias_recientes': noticias_recientes,
     })
+
 
 # Se define el index para que sea la página principal, este será nuestra página de inicio de la pagina web aquí, en views.py
 #El segundo paso será crear la url en url.py tanto de core como de Eltotem, y se crean las rutas
