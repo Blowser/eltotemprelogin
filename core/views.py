@@ -166,10 +166,18 @@ def logout_view(request):
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
+from core.models import MetodoPago
+from django.contrib.auth.decorators import login_required
+
 @login_required
 def ver_perfil(request):
     usuario = request.user.perfil
-    return render(request, 'core/ver_perfil.html', {'usuario': usuario})
+    metodo = MetodoPago.objects.filter(usuario=usuario).first()
+    return render(request, 'core/ver_perfil.html', {
+        'usuario': usuario,
+        'metodo': metodo
+    })
+
 
 # Vista para la página "Quiénes somos"
 def quienes_somos_view(request):
