@@ -1,0 +1,11 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<section class="container mt-5">
+  <h2 class="text-center text-primary">💳 Agregar método de pago</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Guardar método</button>
+  </form>
+</section>
+{% endblock %}
