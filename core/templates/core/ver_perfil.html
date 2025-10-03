@@ -1,5 +1,7 @@
 {% extends 'core/base.html' %}
+{% load static %}
 {% block content %}
+
 <section class="container mt-5">
   <div class="perfil-clan p-4 rounded shadow">
     <h2 class="text-warning text-center">🧙 Perfil del usuario</h2>
@@ -8,5 +10,26 @@
     <p><strong>Rol:</strong> {{ usuario.rol.tipo_rol }}</p>
     <p><strong>Fecha de creación:</strong> {{ usuario.fecha_creacion|date:"d M Y H:i" }}</p>
   </div>
+
+  <div class="metodo-pago mt-4 p-4 rounded shadow bg-light">
+    <h3 class="text-primary">💳 Método de pago</h3>
+    {% if metodo %}
+      <p><strong>Tipo:</strong> {{ metodo.tipo }}</p>
+      <p><strong>Detalle:</strong> {{ metodo.detalle }}</p>
+      <p><strong>Estado:</strong> {{ metodo.estado }}</p>
+      <a href="{% url 'editar_metodo_pago' %}" class="btn btn-outline-warning">Modificar método de pago</a>
+    {% else %}
+      <p class="text-muted">No tienes método de pago registrado.</p>
+      <a href="{% url 'agregar_metodo_pago' %}" class="btn btn-success">Agregar método de pago</a>
+    {% endif %}
+  </div>
+
+  <div class="finalizar-compra mt-4 text-center">
+    <form method="post" action="{% url 'finalizar_compra' %}">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-success btn-lg">Finalizar compra</button>
+    </form>
+  </div>
 </section>
+
 {% endblock %}
