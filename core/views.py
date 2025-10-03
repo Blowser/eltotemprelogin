@@ -632,7 +632,7 @@ def finalizar_compra(request):
 
     carro.delete()  # 🔥 El altar se consume tras la ofrenda
     messages.success(request, "🎉 Pedido registrado. El ritual está completo.")
-    return redirect('ver_carrito')
+    return redirect('ver_perfil')
 
 
 
