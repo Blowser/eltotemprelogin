@@ -177,6 +177,25 @@ def ver_perfil(request):
         'usuario': usuario,
         'metodo': metodo
     })
+    
+from django.shortcuts import render, redirect
+from core.models import MetodoPago
+from core.forms import MetodoPagoForm  # lo creamos en el siguiente paso
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def agregar_metodo_pago(request):
+    if request.method == 'POST':
+        form = MetodoPagoForm(request.POST)
+        if form.is_valid():
+            metodo = form.save(commit=False)
+            metodo.usuario = request.user.perfil
+            metodo.estado = "activo"
+            metodo.save()
+            return redirect('ver_perfil')
+    else:
+        form = MetodoPagoForm()
+    return render(request, 'core/agregar_metodo_pago.html', {'form': form})
 
 
 # Vista para la página "Quiénes somos"
@@ -573,3 +592,5 @@ def finalizar_compra(request):
 
     messages.success(request, "🎉 Pedido registrado. El ritual está completo.")
     return redirect('ver_carrito')  # O donde quieras mostrar el resumen
+
+
