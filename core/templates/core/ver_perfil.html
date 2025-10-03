@@ -15,20 +15,15 @@
     <h3 class="text-primary">💳 Método de pago</h3>
     {% if metodo %}
       <p><strong>Tipo:</strong> {{ metodo.tipo }}</p>
-      <p><strong>Detalle:</strong> {{ metodo.detalle }}</p>
+      <p><strong>Nombre del titular:</strong> {{ metodo.nombre_titular }}</p>
+      <p><strong>Número de tarjeta:</strong> **** **** **** {{ metodo.numero_tarjeta|slice:"-4:" }}</p>
+      <p><strong>Vencimiento:</strong> {{ metodo.vencimiento }}</p>
       <p><strong>Estado:</strong> {{ metodo.estado }}</p>
       <a href="{% url 'editar_metodo_pago' %}" class="btn btn-outline-warning">Modificar método de pago</a>
     {% else %}
       <p class="text-muted">No tienes método de pago registrado.</p>
       <a href="{% url 'agregar_metodo_pago' %}" class="btn btn-success">Agregar método de pago</a>
     {% endif %}
-  </div>
-
-  <div class="finalizar-compra mt-4 text-center">
-    <form method="post" action="{% url 'finalizar_compra' %}">
-      {% csrf_token %}
-      <button type="submit" class="btn btn-success btn-lg">Finalizar compra</button>
-    </form>
   </div>
 </section>
 
