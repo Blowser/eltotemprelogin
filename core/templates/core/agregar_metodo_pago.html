@@ -2,9 +2,28 @@
 {% block content %}
 <section class="container mt-5">
   <h2 class="text-center text-primary">💳 Agregar método de pago</h2>
-  <form method="post">
+  <form method="post" id="form_metodo_pago">
     {% csrf_token %}
-    {{ form.as_p }}
+    <div class="mb-3">
+      <label for="tipo" class="form-label">Tipo</label>
+      <input type="text" class="form-control" id="tipo" name="tipo">
+    </div>
+    <div class="mb-3">
+      <label for="nombre_titular" class="form-label">Nombre del titular</label>
+      <input type="text" class="form-control" id="nombre_titular" name="nombre_titular">
+    </div>
+    <div class="mb-3">
+      <label for="numero_tarjeta" class="form-label">Número de tarjeta</label>
+      <input type="text" class="form-control" id="numero_tarjeta" name="numero_tarjeta">
+    </div>
+    <div class="mb-3">
+      <label for="vencimiento" class="form-label">Vencimiento (MM/AA)</label>
+      <input type="text" class="form-control" id="vencimiento" name="vencimiento">
+    </div>
+    <div class="mb-3">
+      <label for="cvv" class="form-label">CVV</label>
+      <input type="password" class="form-control" id="cvv" name="cvv">
+    </div>
     <button type="submit" class="btn btn-success">Guardar método</button>
   </form>
 </section>
