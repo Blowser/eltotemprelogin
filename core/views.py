@@ -176,7 +176,8 @@ def ver_perfil(request):
     pedidos = Pedido.objects.filter(usuario=usuario).order_by('-fecha_pedido')
     return render(request, 'core/ver_perfil.html', {
         'usuario': usuario,
-        'metodo': metodo
+        'metodo': metodo,
+        'pedidos':pedidos
     })
     
 from django.shortcuts import render, redirect
