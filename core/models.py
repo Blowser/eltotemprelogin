@@ -214,13 +214,17 @@ class Pedido(models.Model):
 
 class MetodoPago(models.Model):
     id_metodo_pago = models.AutoField(primary_key=True)
-    tipo = models.CharField(max_length=15)
-    detalle = models.CharField(max_length=100, null=True, blank=True)
-    estado = models.CharField(max_length=15)
+    tipo = models.CharField(max_length=15)  # Ej: 'tarjeta', 'transferencia'
+    nombre_titular = models.CharField(max_length=100, null=True, blank=True)
+    numero_tarjeta = models.CharField(max_length=16, null=True, blank=True)
+    vencimiento = models.CharField(max_length=5, null=True, blank=True)  # Formato MM/AA
+    cvv = models.CharField(max_length=4, null=True, blank=True)
+    estado = models.CharField(max_length=15)  # Ej: 'activo', 'incompleto'
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.tipo} ({self.estado})"
+
 
 class Pago(models.Model):
     id_pago = models.AutoField(primary_key=True)
