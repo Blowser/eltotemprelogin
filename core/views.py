@@ -121,7 +121,7 @@ def registrarse_view(request):
             login(request, user)  # 🔐 Invoca al espíritu en el altar
             request.session['usuario_id'] = usuario.id
             request.session['registro_exitoso'] = f'Usuario registrado exitosamente. Bienvenido "{username}" al Clan'
-            return redirect('perfil')
+            return redirect('ver_perfil')
 
         except Exception as e:
             return render(request, 'core/registrarse.html', {'error': f'Ocurrió un error inesperado: {e}'})
@@ -143,7 +143,7 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('index')  # o 'perfil' si querés ir directo al altar
+            return redirect('ver_perfil')  # o 'perfil' si querés ir directo al altar
         else:
             messages.error(request, "⚠️ Usuario o contraseña incorrectos.")
             return redirect('login')  # 🔥 redirige para que el mensaje se muestre
