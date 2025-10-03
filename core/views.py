@@ -199,6 +199,23 @@ def agregar_metodo_pago(request):
         return redirect('ver_perfil')
     return render(request, 'core/agregar_metodo_pago.html')
 
+@login_required
+def editar_metodo_pago(request):
+    perfil = request.user.perfil
+    metodo = MetodoPago.objects.filter(usuario=perfil).first()
+
+    if request.method == 'POST':
+        metodo.tipo = request.POST.get('tipo')
+        metodo.nombre_titular = request.POST.get('nombre_titular')
+        metodo.numero_tarjeta = request.POST.get('numero_tarjeta')
+        metodo.vencimiento = request.POST.get('vencimiento')
+        metodo.cvv = request.POST.get('cvv')
+        metodo.save()
+        messages.success(request, "💳 Método de pago actualizado.")
+        return redirect('ver_perfil')
+
+    return render(request, 'core/editar_metodo_pago.html', {'metodo': metodo})
+
 
 
 
