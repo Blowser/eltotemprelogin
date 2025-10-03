@@ -173,6 +173,7 @@ from django.contrib.auth.decorators import login_required
 def ver_perfil(request):
     usuario = request.user.perfil
     metodo = MetodoPago.objects.filter(usuario=usuario).first()
+    pedidos = Pedido.objects.filter(usuario=usuario).order_by('-fecha_pedido')
     return render(request, 'core/ver_perfil.html', {
         'usuario': usuario,
         'metodo': metodo
@@ -629,8 +630,10 @@ def finalizar_compra(request):
         metodo_pago=metodo
     )
 
+    carro.delete()  # 🔥 El altar se consume tras la ofrenda
     messages.success(request, "🎉 Pedido registrado. El ritual está completo.")
     return redirect('ver_carrito')
+
 
 
 
