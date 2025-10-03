@@ -561,6 +561,12 @@ def eliminar_item_carrito(request, item_id):
     messages.success(request, f"🧹 Se eliminó {item.producto.nombre} del carrito.")
     return redirect('ver_carrito')
 
+from django.utils.timezone import now
+from django.contrib import messages
+from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
+from core.models import CarroCompras, Direccion, MetodoPago, Pedido, Pago
+
 @login_required(login_url='login')
 def finalizar_compra(request):
     perfil = request.user.perfil
@@ -568,16 +574,27 @@ def finalizar_compra(request):
     direccion = Direccion.objects.filter(usuario=perfil).first()
     metodo = MetodoPago.objects.filter(usuario=perfil).first()
 
-    if not carro or not direccion or not metodo:
-        messages.error(request, "Falta dirección, método de pago o carrito.")
+    # 🔍 Validaciones Totémicas
+    if not carro:
+        messages.error(request, "⚠️ No tienes un carrito activo.")
         return redirect('ver_carrito')
 
+    if not direccion:
+        messages.error(request, "⚠️ No tienes una dirección registrada.")
+        return redirect('ver_perfil')  # o 'editar_direccion' si lo tenés
+
+    if not metodo:
+        messages.error(request, "⚠️ No tienes un método de pago registrado.")
+        return redirect('agregar_metodo_pago')
+
+    # 🧮 Totales
     total = carro.total_sin_iva
     iva = carro.iva_compra
     precio_final = carro.precio_final
 
+    # 🧾 Pedido y pago
     pedido = Pedido.objects.create(
-        fecha_pedido=datetime.now(),
+        fecha_pedido=now(),
         estado_pedido="pendiente",
         total_sin_iva=total,
         iva_compra=iva,
@@ -590,12 +607,13 @@ def finalizar_compra(request):
     Pago.objects.create(
         monto=precio_final,
         estado="pendiente",
-        fecha_proceso=datetime.now(),
+        fecha_proceso=now(),
         pedido=pedido,
         metodo_pago=metodo
     )
 
     messages.success(request, "🎉 Pedido registrado. El ritual está completo.")
-    return redirect('ver_carrito')  # O donde quieras mostrar el resumen
+    return redirect('ver_carrito')
+
 
 
