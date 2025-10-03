@@ -6,7 +6,11 @@
     {% csrf_token %}
     <div class="mb-3">
       <label for="tipo" class="form-label">Tipo</label>
-      <input type="text" class="form-control" id="tipo" name="tipo">
+      <select class="form-select" id="tipo" name="tipo">
+        <option value="">Selecciona tipo de tarjeta</option>
+        <option value="crédito">Crédito</option>
+        <option value="débito">Débito</option>
+      </select>
     </div>
     <div class="mb-3">
       <label for="nombre_titular" class="form-label">Nombre del titular</label>
@@ -28,3 +32,4 @@
   </form>
 </section>
 {% endblock %}
+
