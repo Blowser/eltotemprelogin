@@ -180,22 +180,27 @@ def ver_perfil(request):
     
 from django.shortcuts import render, redirect
 from core.models import MetodoPago
-from core.forms import MetodoPagoForm  # lo creamos en el siguiente paso
 from django.contrib.auth.decorators import login_required
 
 @login_required
 def agregar_metodo_pago(request):
     if request.method == 'POST':
-        form = MetodoPagoForm(request.POST)
-        if form.is_valid():
-            metodo = form.save(commit=False)
-            metodo.usuario = request.user.perfil
-            metodo.estado = "activo"
-            metodo.save()
-            return redirect('ver_perfil')
-    else:
-        form = MetodoPagoForm()
-    return render(request, 'core/agregar_metodo_pago.html', {'form': form})
+        perfil = request.user.perfil
+        MetodoPago.objects.create(
+            tipo=request.POST.get('tipo'),
+            nombre_titular=request.POST.get('nombre_titular'),
+            numero_tarjeta=request.POST.get('numero_tarjeta'),
+            vencimiento=request.POST.get('vencimiento'),
+            cvv=request.POST.get('cvv'),
+            estado="activo",
+            usuario=perfil
+        )
+        messages.success(request, "💳 Método de pago registrado.")
+        return redirect('ver_perfil')
+    return render(request, 'core/agregar_metodo_pago.html')
+
+
+
 
 
 # Vista para la página "Quiénes somos"
