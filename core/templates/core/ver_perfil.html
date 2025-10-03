@@ -10,6 +10,18 @@
     <p><strong>Rol:</strong> {{ usuario.rol.tipo_rol }}</p>
     <p><strong>Fecha de creación:</strong> {{ usuario.fecha_creacion|date:"d M Y H:i" }}</p>
   </div>
+<h3 class="text-secondary mt-5">📜 Historial de pedidos</h3>
+{% if pedidos %}
+  <ul class="list-group">
+    {% for pedido in pedidos %}
+      <li class="list-group-item">
+        Pedido #{{ pedido.id }} — {{ pedido.fecha_pedido|date:"d M Y H:i" }} — {{ pedido.estado_pedido }} — ${{ pedido.precio_final }}
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p class="text-muted">No tienes pedidos registrados aún.</p>
+{% endif %}
 
   <div class="metodo-pago mt-4 p-4 rounded shadow bg-light">
     <h3 class="text-primary">💳 Método de pago</h3>
