@@ -13,6 +13,7 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('perfil/', views.ver_perfil, name='ver_perfil'),
     path('perfil/metodo/agregar/', views.agregar_metodo_pago, name='agregar_metodo_pago'),
+    path('perfil/metodo/editar/', views.editar_metodo_pago, name='editar_metodo_pago'),
     path('quienes-somos/', views.quienes_somos_view, name='quienes_somos'),
     path('noticias/', views.NoticiasFiltradasView.as_view(), name='noticias'),
     path('scrap-tcg/', views.scrap_tcg, name='scrap_tcg'),
