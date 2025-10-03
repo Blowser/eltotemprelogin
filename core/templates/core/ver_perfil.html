@@ -15,7 +15,7 @@
   <ul class="list-group">
     {% for pedido in pedidos %}
       <li class="list-group-item">
-        Pedido #{{ pedido.id }} — {{ pedido.fecha_pedido|date:"d M Y H:i" }} — {{ pedido.estado_pedido }} — ${{ pedido.precio_final }}
+        Pedido #{{ pedido.id_pedido }} — {{ pedido.fecha_pedido|date:"d M Y H:i" }} — {{ pedido.estado_pedido }} — ${{ pedido.precio_final }}
       </li>
     {% endfor %}
   </ul>
