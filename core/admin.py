@@ -64,8 +64,9 @@ class PedidoAdmin(admin.ModelAdmin):
 
 @admin.register(MetodoPago)
 class MetodoPagoAdmin(admin.ModelAdmin):
-    list_display = ('id_metodo_pago', 'tipo', 'detalle', 'estado', 'usuario')
-    list_filter = ('estado', 'usuario')
+    list_display = ('id_metodo_pago', 'tipo', 'nombre_titular', 'numero_tarjeta', 'vencimiento', 'estado', 'usuario')
+    list_filter = ('estado', 'tipo', 'usuario')
+    search_fields = ('nombre_titular', 'numero_tarjeta', 'usuario__user__username')
 
 @admin.register(Pago)
 class PagoAdmin(admin.ModelAdmin):
