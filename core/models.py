@@ -207,7 +207,8 @@ class Pedido(models.Model):
     precio_final = models.IntegerField()
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     direccion = models.ForeignKey(Direccion, on_delete=models.CASCADE)
-    carro = models.ForeignKey(CarroCompras, on_delete=models.CASCADE)
+    carro = models.ForeignKey(CarroCompras, on_delete=models.SET_NULL, null=True)
+
 
     def __str__(self):
         return f"Pedido #{self.id_pedido} de {self.usuario}"
