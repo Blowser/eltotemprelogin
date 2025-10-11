@@ -1,5 +1,5 @@
 # core/urls.py
-
+#un comment cualquiera jejeje
 from django.urls import path
 from . import views
 from .views import ProductosView, AccesoriosView, crear_thread, ver_threads, crear_post, detalle_thread, ver_carrito, finalizar_compra
